@@ -5,9 +5,12 @@
   "scripts": {},
   "private": true,
   "dependencies": {
+    "@as-integrations/koa": "^1.1.1",
     "@ersanyamarya/apollo-graphql-helper": "^0.0.9",
     "@ersanyamarya/common-node-utils": "^0.0.9",
     "@ersanyamarya/essential-server-utils": "^0.0.10",
+    "graphql-compose": "^9.0.10",
+    "graphql-compose-mongoose": "^9.8.0",
     "mongoose": "^7.5.2",
     "tslib": "^2.3.0"
   },
