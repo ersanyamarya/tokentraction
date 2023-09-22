@@ -17,6 +17,7 @@ export default function Routing() {
     <Router>
       <Routes>
         <Route path="/" element={<LandingPage />} />
+
         <Route
           path="/app"
           element={
@@ -25,6 +26,7 @@ export default function Routing() {
             </AuthRoute>
           }
         >
+          {/* <Route path="/" element={<LandingPage />} /> */}
           <Route path="/app" element={<Dashboard />} />
         </Route>
         <Route path="*" element={<Navigate to="/" />} />

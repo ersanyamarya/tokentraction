@@ -34,13 +34,14 @@ const getTheme = (mode: PaletteMode): Theme => {
           // for different sizes
           root: {
             borderRadius: '0.5rem',
-            padding: '0.75rem 1.5rem',
+
             fontSize: '1.375rem',
             fontStyle: 'normal',
             fontWeight: 500,
             lineHeight: '1.75rem',
           },
           contained: {
+            padding: '0.75rem 1.5rem',
             border: '2px solid #fff',
             background: 'linear-gradient(180deg, rgba(3, 251, 191, 0.57) -51.5%, rgba(45, 70, 200, 0.98) 76.02%)',
             ':hover': {
@@ -53,11 +54,18 @@ const getTheme = (mode: PaletteMode): Theme => {
             },
           },
           outlined: {
-            border: '2px solid #fff',
-            background: 'transparent',
-            color: '#fff',
+            padding: '0.5rem 1rem',
+            border: '2.5px solid transparent',
+            background: '#fff',
+            color: '#2c57c2',
+            backgroundImage: 'linear-gradient(180deg, rgba(3, 251, 191, 0.57) -51.5%, rgba(45, 70, 200, 0.98) 76.02%)',
+            backgroundOrigin: 'border-box',
+            boxShadow: 'inset 0 100vw white',
+            fontWeight: 700,
             ':hover': {
               border: '2px solid #fff',
+              backgroundImage: 'none',
+              boxShadow: 'none',
               background: 'linear-gradient(180deg, rgba(3, 251, 191, 0.57) -51.5%, rgba(45, 70, 200, 0.98) 76.02%)',
               color: '#fff',
             },
@@ -66,15 +74,13 @@ const getTheme = (mode: PaletteMode): Theme => {
       },
       MuiAppBar: {
         defaultProps: {
-          color: 'primary',
+          color: 'transparent',
           position: 'static',
         },
         styleOverrides: {
           root: {
-            boxShadow: 'none',
-            '& *': {
-              color: theme.palette.primary.contrastText,
-            },
+            height: '84px',
+            lineHeight: '84px',
           },
         },
       },
@@ -87,7 +93,11 @@ const getTheme = (mode: PaletteMode): Theme => {
             display: 'flex',
             flexDirection: 'row',
             justifyContent: 'space-between',
+            gap: '1rem',
             alignItems: 'center',
+            height: '84px',
+            lineHeight: '84px',
+            padding: '0.95rem',
           },
         },
       },

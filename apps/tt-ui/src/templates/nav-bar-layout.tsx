@@ -25,8 +25,22 @@ export function NavBarLayout() {
   const navigate = useNavigate()
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      <Drawer
+    <Box
+      sx={{
+        display: 'flex',
+        height: '100vh',
+        width: '100vw',
+        flexDirection: 'column',
+        overflow: 'hidden',
+      }}
+    >
+      <AppBar elevation={1}>
+        <Toolbar>
+          <Box component="img" src="/text_logo.svg" alt="Token Traction Logo" height="100%" />
+          <Box component="img" src="/avatar.svg" alt="Token Traction Logo" width="80px" />
+        </Toolbar>
+      </AppBar>
+      {/* <Drawer
         sx={{
           width: drawerWidth,
           flexShrink: 0,
@@ -54,11 +68,12 @@ export function NavBarLayout() {
             <ListItemText primary="Create" />
           </ListItemButton>
         </List>
-      </Drawer>{' '}
+      </Drawer> */}
       <Box
         component="main"
         sx={{
-          flexGrow: 1,
+          flex: 1,
+          overflow: 'auto',
         }}
       >
         {outlet}
