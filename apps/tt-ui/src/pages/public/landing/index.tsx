@@ -1,7 +1,5 @@
 import styled from '@emotion/styled'
-import { Typography, Box, Button, Stack, useMediaQuery } from '@mui/material'
-import { ArrowRight } from 'lucide-react'
-import { MetaMaskProvider, useMetaMask } from 'metamask-react'
+import { Box, Stack, Typography } from '@mui/material'
 import { Metamask } from './metamask'
 const Container = styled(Stack)`
   overflow-x: hidden;
@@ -45,9 +43,6 @@ const SubtitleText = styled(Typography)`
 `
 
 export function LandingPage() {
-  const { status, connect, account, chainId, ethereum } = useMetaMask()
-  const isSmallScreen = useMediaQuery('(max-width: 600px)')
-
   return (
     <Container direction="row" justifyContent="space-between" alignItems="center" flexWrap="wrap">
       <Box className="left section">

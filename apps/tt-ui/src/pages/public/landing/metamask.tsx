@@ -69,7 +69,6 @@ export function Metamask() {
   const currentStatus = heroMessages[status]
   return (
     <Container className="section">
-      status {status}
       <Typography variant="h2" component="h2">
         "{currentStatus.message}"
       </Typography>
@@ -85,10 +84,8 @@ export function Metamask() {
       <p>
         <Button
           disabled={currentStatus.disabled}
-          className="cta-button"
           variant="contained"
           color="primary"
-          size="large"
           onClick={() => {
             if (currentStatus.disabled) return
             if (status === 'unavailable') {

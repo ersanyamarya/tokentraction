@@ -26,29 +26,40 @@ const getTheme = (mode: PaletteMode): Theme => {
         styleOverrides: {
           body: {
             fontFamily,
-            ['.cta-button']: {
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'center',
-              alignItems: 'center',
-              gap: '0.6rem',
-              padding: '1rem 2rem',
-              fontSize: '1.375rem',
-              fontStyle: 'normal',
-              fontWeight: 500,
-              lineHeight: '1.75rem',
-              borderRadius: '0.5rem',
+          },
+        },
+      },
+      MuiButton: {
+        styleOverrides: {
+          // for different sizes
+          root: {
+            borderRadius: '0.5rem',
+            padding: '0.75rem 1.5rem',
+            fontSize: '1.375rem',
+            fontStyle: 'normal',
+            fontWeight: 500,
+            lineHeight: '1.75rem',
+          },
+          contained: {
+            border: '2px solid #fff',
+            background: 'linear-gradient(180deg, rgba(3, 251, 191, 0.57) -51.5%, rgba(45, 70, 200, 0.98) 76.02%)',
+            ':hover': {
+              border: '2.5px solid transparent',
+              background: '#fff',
+              color: '#2c57c2',
+              backgroundImage: 'linear-gradient(180deg, rgba(3, 251, 191, 0.57) -51.5%, rgba(45, 70, 200, 0.98) 76.02%)',
+              backgroundOrigin: 'border-box',
+              boxShadow: 'inset 0 100vw white',
+            },
+          },
+          outlined: {
+            border: '2px solid #fff',
+            background: 'transparent',
+            color: '#fff',
+            ':hover': {
               border: '2px solid #fff',
               background: 'linear-gradient(180deg, rgba(3, 251, 191, 0.57) -51.5%, rgba(45, 70, 200, 0.98) 76.02%)',
-              ':hover': {
-                borderRadius: '0.5rem',
-                background: '#fff',
-                color: '#2c57c2',
-                backgroundImage: 'linear-gradient(180deg, rgba(3, 251, 191, 0.57) -51.5%, rgba(45, 70, 200, 0.98) 76.02%)',
-                backgroundOrigin: 'border-box',
-                boxShadow: 'inset 0 100vw white',
-                border: '2px solid transparent',
-              },
+              color: '#fff',
             },
           },
         },

@@ -27,7 +27,7 @@ export default function Routing() {
         >
           <Route path="/app" element={<Dashboard />} />
         </Route>
-        <Route path="*" element={<NotFound />} />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>
   )
