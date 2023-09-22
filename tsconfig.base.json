@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@tokentraction/config": ["libs/src/index.ts"]
+      "@tokentraction/config": ["libs/config/src/index.ts"],
+      "@tokentraction/mongodb": ["libs/mongodb/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

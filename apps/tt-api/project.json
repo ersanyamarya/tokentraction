@@ -1,7 +1,7 @@
 {
   "name": "tt-api",
-  "$schema": "../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/src",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/tt-api/src",
   "projectType": "application",
   "targets": {
     "build": {
@@ -10,12 +10,12 @@
       "defaultConfiguration": "production",
       "options": {
         "platform": "node",
-        "outputPath": "dist/apps",
+        "outputPath": "dist/apps/tt-api",
         "format": ["cjs"],
         "bundle": false,
-        "main": "apps/src/main.ts",
-        "tsConfig": "apps/tsconfig.app.json",
-        "assets": ["apps/src/assets"],
+        "main": "apps/tt-api/src/main.ts",
+        "tsConfig": "apps/tt-api/tsconfig.app.json",
+        "assets": ["apps/tt-api/src/assets"],
         "generatePackageJson": true,
         "esbuildOptions": {
           "sourcemap": true,
@@ -55,7 +55,7 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/**/*.ts"]
+        "lintFilePatterns": ["apps/tt-api/**/*.ts"]
       }
     }
   },

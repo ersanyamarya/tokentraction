@@ -5,6 +5,9 @@
   "scripts": {},
   "private": true,
   "dependencies": {
+    "@ersanyamarya/apollo-graphql-helper": "^0.0.9",
+    "@ersanyamarya/common-node-utils": "^0.0.9",
+    "@ersanyamarya/essential-server-utils": "^0.0.10",
     "mongoose": "^7.5.2",
     "tslib": "^2.3.0"
   },
