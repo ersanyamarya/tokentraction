@@ -5,6 +5,7 @@ import { CssBaseline } from '@mui/material'
 import { StrictMode } from 'react'
 import * as ReactDOM from 'react-dom/client'
 import Routing from './routing'
+import { MetaMaskProvider } from 'metamask-react'
 
 const cache = new InMemoryCache()
 const client = new ApolloClient({
@@ -18,7 +19,9 @@ root.render(
     <ThemeContainer>
       <CssBaseline />
       <ApolloProvider client={client}>
-        <Routing />
+        <MetaMaskProvider>
+          <Routing />
+        </MetaMaskProvider>
       </ApolloProvider>
     </ThemeContainer>
   </StrictMode>
