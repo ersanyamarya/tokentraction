@@ -4,10 +4,27 @@
   "license": "MIT",
   "scripts": {},
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "mongoose": "^7.5.2",
+    "tslib": "^2.3.0"
+  },
   "devDependencies": {
+    "@nx/esbuild": "16.8.1",
+    "@nx/eslint-plugin": "16.8.1",
     "@nx/js": "16.8.1",
+    "@nx/linter": "16.8.1",
+    "@nx/node": "^16.8.1",
+    "@nx/react": "^16.8.1",
+    "@nx/vite": "^16.8.1",
     "@nx/workspace": "16.8.1",
-    "nx": "16.8.1"
+    "@types/node": "~18.7.1",
+    "@typescript-eslint/eslint-plugin": "^5.60.1",
+    "@typescript-eslint/parser": "^5.60.1",
+    "esbuild": "^0.17.17",
+    "eslint": "~8.46.0",
+    "eslint-config-prettier": "8.1.0",
+    "nx": "16.8.1",
+    "prettier": "^2.6.2",
+    "typescript": "~5.1.3"
   }
 }
