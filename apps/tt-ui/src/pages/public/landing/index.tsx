@@ -62,12 +62,11 @@ const HeroText = styled(Typography)`
 `
 
 const SignUpButton = styled(Button)`
-  display: inline-flex;
+  display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 0.5rem;
-
+  gap: 0.6rem;
   padding: 1rem 2rem;
 
   font-size: 1.375rem;
@@ -82,7 +81,7 @@ const SignUpButton = styled(Button)`
   :hover {
     border-radius: 0.5rem;
     // border-image: linear-gradient(180deg, rgba(3, 251, 191, 0.57) -51.5%, rgba(45, 70, 200, 0.98) 76.02%);
-    border-image: linear-gradient(180deg, rgba(3, 251, 191, 0.57) -51.5%, rgba(45, 70, 200, 0.98) 76.02%) 1 100%;
+    border-image: linear-gradient(180deg, rgba(3, 251, 191, 0.57) -51.5%, rgba(45, 70, 200, 0.98) 76.02%) 100%;
     background: #fff;
     color: #2c57c2;
   }
