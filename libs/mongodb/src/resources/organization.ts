@@ -1,4 +1,5 @@
 import { model, Schema, Document } from 'mongoose'
+import { LocationSchema } from './helpers/location'
 
 const MemberSchema = new Schema(
   {
@@ -121,11 +122,7 @@ const OrganizationSchema = new Schema(
       enum: ['1-10', '11-50', '51-200', '201-500', '501-1000', '1001-5000', '5001-10000', '10000+'],
       required: true,
     },
-    location: {
-      country: String,
-      state: String,
-      city: String,
-    },
+    location: LocationSchema,
     website: String,
     pictureUrl: String,
     members: [MemberSchema],

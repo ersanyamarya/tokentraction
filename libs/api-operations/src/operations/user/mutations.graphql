@@ -3,3 +3,8 @@ mutation UserCreate($walletAddress: String!, $pictureUrl: String, $displayName: 
     _id
   }
 }
+mutation UserUpdate($userUpdateId: MongoID!, $record: UpdateOneUserInput!) {
+  userUpdate(id: $userUpdateId, record: $record) {
+    _id
+  }
+}

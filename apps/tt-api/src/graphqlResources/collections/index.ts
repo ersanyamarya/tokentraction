@@ -1,3 +1,4 @@
 import User from './user'
+import Organization from './organization'
 
-export default [User]
+export default [User, Organization]

@@ -1,4 +1,5 @@
 import { model, Schema, Document } from 'mongoose'
+import { LocationSchema } from './helpers/location'
 
 const UserSchema = new Schema(
   {
@@ -15,11 +16,7 @@ const UserSchema = new Schema(
       type: String,
     },
     age: Number,
-    location: {
-      country: String,
-      state: String,
-      city: String,
-    },
+    location: LocationSchema,
     gender: {
       type: String,
       enum: ['Male', 'Female', 'Non-Binary', 'Transgender', 'Other', 'Prefer Not to Say'],
