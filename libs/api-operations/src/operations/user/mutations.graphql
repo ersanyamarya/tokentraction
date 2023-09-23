@@ -1,0 +1,5 @@
+mutation UserCreate($walletAddress: String!, $pictureUrl: String, $displayName: String!) {
+  userCreate(walletAddress: $walletAddress, pictureUrl: $pictureUrl, displayName: $displayName) {
+    _id
+  }
+}

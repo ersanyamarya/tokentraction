@@ -54,8 +54,8 @@ export function Dashboard() {
                 y2="39.875"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stop-color="#03FBBF" stop-opacity="0.57" />
-                <stop offset="1" stop-color="#2D46C8" stop-opacity="0.98" />
+                <stop stopColor="#03FBBF" stopOpacity="0.57" />
+                <stop offset="1" stopColor="#2D46C8" stopOpacity="0.98" />
               </linearGradient>
             </defs>
           </svg>

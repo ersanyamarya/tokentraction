@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@tokentraction/api-operations": ["libs/api-operations/src/index.ts"],
       "@tokentraction/config": ["libs/config/src/index.ts"],
       "@tokentraction/mongodb": ["libs/mongodb/src/index.ts"],
       "@tokentraction/tt-design": ["libs/tt-design/src/index.ts"]

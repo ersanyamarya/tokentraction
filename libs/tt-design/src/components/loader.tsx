@@ -5,6 +5,6 @@ interface LoaderProps {
   className?: string
 }
 
-export function Loader({ size = 32, className }: LoaderProps) {
+export function TTLoader({ size = 32, className }: LoaderProps) {
   return <CircularProgress size={size} className={className} />
 }
