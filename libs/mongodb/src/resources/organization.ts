@@ -1,5 +1,4 @@
-import { model, Schema, Document } from 'mongoose'
-import { LocationSchema } from './helpers/location'
+import { Document, Schema, model } from 'mongoose'
 
 const MemberSchema = new Schema(
   {

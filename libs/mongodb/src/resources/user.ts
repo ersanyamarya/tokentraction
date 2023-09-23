@@ -1,5 +1,4 @@
-import { model, Schema, Document } from 'mongoose'
-import { LocationSchema } from './helpers/location'
+import { Document, Schema, model } from 'mongoose'
 
 const UserSchema = new Schema(
   {
@@ -230,6 +229,10 @@ export interface UserInterface extends Document {
   walletAddress: string
   displayName: string
   pictureUrl?: string
+  age?: number
+  country?: string
+  state?: string
+  city?: string
 }
 
 export const UserModel = model<UserInterface>('User', UserSchema)

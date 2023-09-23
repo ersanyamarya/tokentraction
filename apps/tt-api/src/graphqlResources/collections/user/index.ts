@@ -1,8 +1,27 @@
 import { GQLErrorHandler } from '@ersanyamarya/apollo-graphql-helper'
-import { UserModel, OrganizationModel } from '@tokentraction/mongodb'
+import { openAIConfig } from '@tokentraction/config'
+import { UserModel } from '@tokentraction/mongodb'
 import { composeMongoose } from 'graphql-compose-mongoose'
+import { ChatOpenAI } from 'langchain/chat_models/openai'
+import { OpenAIEmbeddings } from 'langchain/embeddings/openai'
+import { OpenAI } from 'langchain/llms/openai'
 import OrganizationResource from '../organization'
 const UserTC = composeMongoose(UserModel, {})
+
+const model = new OpenAI({
+  openAIApiKey: openAIConfig.apiKey,
+  temperature: 0.1,
+})
+
+const chatModel = new ChatOpenAI({
+  openAIApiKey: openAIConfig.apiKey,
+  temperature: 0.3,
+  modelName: 'gpt-3.5-turbo',
+})
+
+const embeddings = new OpenAIEmbeddings({
+  openAIApiKey: openAIConfig.apiKey,
+})
 
 UserTC.addRelation('organizations', {
   resolver: () => OrganizationResource.ResourceTC.mongooseResolvers.findMany(),
