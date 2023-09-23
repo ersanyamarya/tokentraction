@@ -36,3 +36,21 @@ query UserConnectWallet($walletAddress: String!) {
     }
   }
 }
+
+query PersonaList($filter: FilterFindManyPersonaInput) {
+  personaList(filter: $filter) {
+    personaType
+    userId
+    name
+    age
+    gender
+    location
+    needs
+    goals
+    painPoints
+    expectations
+    _id
+    createdAt
+    updatedAt
+  }
+}

@@ -1,17 +1,31 @@
-import { Stack, Typography, Button, Dialog } from '@mui/material'
-import { User } from '@tokentraction/api-operations'
+import { Stack, Typography, Button, Dialog, List, ListItem } from '@mui/material'
+import { User, usePersonaListQuery } from '@tokentraction/api-operations'
 import { Plus } from 'lucide-react'
 import { useState } from 'react'
 import { HealthCareForm } from './HealthCareForm'
 import { EnvironmentalistForm } from './EnvironmentalistForm'
+import { TTLoader } from '@tokentraction/tt-design'
+import { useAuth } from '../../../../state'
 
 interface PersonaTabProps {
   persona: User
 }
 
 export function PersonaTab({ persona }: PersonaTabProps) {
+  const { user } = useAuth()
   const [healthCarePersonaShown, setHealthCarePersonaShown] = useState(false)
   const [environmentalistPersonaShown, setEnvironmentalistPersonaShown] = useState(false)
+  const [loading, setLoading] = useState(false)
+
+  const { data } = usePersonaListQuery({
+    variables: {
+      filter: {
+        userId: user?._id,
+      },
+    },
+  })
+
+  if (loading) return <TTLoader />
 
   return (
     <Stack gap={2} justifyContent="stretch" alignItems="stretch">
@@ -35,11 +49,44 @@ export function PersonaTab({ persona }: PersonaTabProps) {
       <Button variant="contained" color="primary" endIcon={<Plus />} onClick={() => setEnvironmentalistPersonaShown(true)}>
         Add Environmental Persona
       </Button>
+      <Stack gap={2} justifyContent="stretch" alignItems="stretch" direction="row" flexWrap="wrap">
+        {data?.personaList?.map(persona => {
+          return (
+            <Stack key={persona._id} sx={{ border: '1px solid #ccc', borderRadius: '4px', p: 2, mt: 2 }}>
+              <Typography variant="h5">{persona.personaType}</Typography>
+              <Typography variant="h6">Needs:</Typography>
+              <List>
+                {persona?.needs?.map(item => (
+                  <ListItem key={item}>{item}</ListItem>
+                ))}
+              </List>
+              <Typography variant="h6">Goals:</Typography>
+              <List>
+                {persona?.goals?.map(item => (
+                  <ListItem key={item}>{item}</ListItem>
+                ))}
+              </List>
+              <Typography variant="h6">Pain Points:</Typography>
+              <List>
+                {persona?.painPoints?.map(item => (
+                  <ListItem key={item}>{item}</ListItem>
+                ))}
+              </List>
+              <Typography variant="h6">Expectations:</Typography>
+              <List>
+                {persona?.expectations?.map(item => (
+                  <ListItem key={item}>{item}</ListItem>
+                ))}
+              </List>
+            </Stack>
+          )
+        })}
+      </Stack>
       <Dialog open={healthCarePersonaShown} onClose={() => setHealthCarePersonaShown(false)} fullScreen>
-        <HealthCareForm setHealthCarePersonaShown={setHealthCarePersonaShown} />
+        <HealthCareForm setHealthCarePersonaShown={setHealthCarePersonaShown} seLoading={setLoading} />
       </Dialog>
       <Dialog open={environmentalistPersonaShown} onClose={() => setEnvironmentalistPersonaShown(false)} fullScreen>
-        <EnvironmentalistForm setEnvironmentalistPersonaShown={setEnvironmentalistPersonaShown} />
+        <EnvironmentalistForm setEnvironmentalistPersonaShown={setEnvironmentalistPersonaShown} seLoading={setLoading} />
       </Dialog>
     </Stack>
   )

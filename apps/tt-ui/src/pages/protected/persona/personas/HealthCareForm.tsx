@@ -1,22 +1,35 @@
-import { Stack, Typography, Button, TextField, MenuItem, FormControl, InputLabel, Select } from '@mui/material'
-import useForm from '../../../../hooks/useForm'
+import { Button, FormControl, InputLabel, MenuItem, Select, Stack, TextField, Typography } from '@mui/material'
+import { EnumPersonaPersonaType, useUserGeneratePersonaMutation } from '@tokentraction/api-operations'
 import { PersonaQuestion } from '.'
+import useForm from '../../../../hooks/useForm'
+import { useAuth } from '../../../../state'
 
 interface HealthCareFormProps {
   setHealthCarePersonaShown: (open: boolean) => void
+  seLoading: (loading: boolean) => void
 }
-export function HealthCareForm({ setHealthCarePersonaShown }: HealthCareFormProps) {
+export function HealthCareForm({ setHealthCarePersonaShown, seLoading }: HealthCareFormProps) {
+  const { user } = useAuth()
+  const [createPersona] = useUserGeneratePersonaMutation({
+    onCompleted: data => {
+      seLoading(false)
+    },
+    onError: error => {
+      console.log(error)
+      seLoading(false)
+    },
+  })
   const sampleAnswers: Record<string, string | string[]> = {
-    interest_in_healthcare_advancements: '',
-    preferred_healthcare_sources: [],
-    holistic_wellbeing_practices: [],
-    healthcare_related_hobbies: [],
-    trusted_healthcare_brands: [],
-    preferred_healthcare_communities: [],
-    healthcare_goals: [],
-    preferred_healthcare_information_format: [],
-    role_in_healthcare: '',
-    healthcare_challenges: [],
+    interests: [],
+    chronic_conditions: [],
+    goals: [],
+    information_sources: [],
+    pain_points: [],
+    expectations: [],
+    technology_usage: '',
+    feedback: '',
+    sharing_experience: '',
+    support_others: '',
   }
   const { state, registerField, valueExists } = useForm(sampleAnswers)
   return (
@@ -64,8 +77,27 @@ export function HealthCareForm({ setHealthCarePersonaShown }: HealthCareFormProp
           color="primary"
           disabled={!valueExists(Object.keys(sampleAnswers))}
           onClick={() => {
+            seLoading(true)
             setHealthCarePersonaShown(false)
-            // createOrganization(state as CreateOneOrganizationInput)
+            const questions = healthCarePersonaQuestions.reduce((acc: string, question: PersonaQuestion) => {
+              if (question.isMultipleSelect) {
+                if (Array.isArray(state[question.slug])) {
+                  return acc + question.question + ':' + state[question.slug].join(',') + ';'
+                }
+              } else {
+                return acc + question.question + ':' + state[question.slug] + ';'
+              }
+              return acc
+            }, '')
+
+            createPersona({
+              variables: {
+                userGeneratePersonaId: user?._id,
+                type: EnumPersonaPersonaType.HealthCare,
+                questions,
+                theme: 'Health Care Persona',
+              },
+            })
           }}
         >
           Create
@@ -76,83 +108,133 @@ export function HealthCareForm({ setHealthCarePersonaShown }: HealthCareFormProp
 }
 const healthCarePersonaQuestions: PersonaQuestion[] = [
   {
-    slug: 'interest_in_healthcare_advancements',
-    question: 'How interested are you in healthcare advancements?',
+    slug: 'interests',
+    question: 'What aspects of healthcare are you most passionate about?',
+    isMultipleChoice: false,
+    isMultipleSelect: true,
+    options: [
+      'Holistic well-being',
+      'Medical research and advancements',
+      'Patient advocacy',
+      'Alternative therapies',
+      'Chronic condition management',
+      'Mental health support',
+      'Healthcare technology',
+      'Nutrition and fitness',
+      'Disease prevention',
+    ],
+    answer: [],
+  },
+  {
+    slug: 'chronic_conditions',
+    question: 'Do you currently suffer from any chronic conditions or severe diseases?',
+    isMultipleChoice: true,
+    isMultipleSelect: true,
+    options: [
+      'Yes, I have one or more chronic conditions',
+      "No, I don't have any chronic conditions",
+      "I'd rather not disclose",
+    ],
+    answer: [],
+  },
+  {
+    slug: 'goals',
+    question: 'What are your primary goals related to healthcare and well-being?',
+    isMultipleChoice: false,
+    isMultipleSelect: true,
+    options: [
+      'Improve my overall health',
+      'Better manage my chronic condition',
+      'Stay informed about healthcare advancements',
+      'Support others facing health challenges',
+      'Explore alternative treatments',
+      'Enhance my mental well-being',
+      'Stay active and fit',
+      'Prevent future health issues',
+    ],
+    answer: [],
+  },
+  {
+    slug: 'information_sources',
+    question: 'Where do you typically seek healthcare information?',
+    isMultipleChoice: false,
+    isMultipleSelect: true,
+    options: [
+      'Medical professionals',
+      'Online health forums and communities',
+      'Books and research papers',
+      'Social media',
+      'Holistic health practitioners',
+      'Family and friends',
+      'Healthcare news websites',
+      'Mobile apps',
+    ],
+    answer: [],
+  },
+  {
+    slug: 'pain_points',
+    question: 'What are the biggest challenges or pain points you face in your healthcare journey?',
+    isMultipleChoice: false,
+    isMultipleSelect: true,
+    options: [
+      'Access to specialized healthcare',
+      'Managing treatment costs',
+      'Information overload',
+      'Lack of emotional support',
+      'Side effects of medications',
+      'Difficulty finding trustworthy health information',
+      'Long waiting times for appointments',
+      'Staying motivated for self-care',
+    ],
+    answer: [],
+  },
+  {
+    slug: 'expectations',
+    question: 'What do you expect from healthcare-related products or services?',
+    isMultipleChoice: false,
+    isMultipleSelect: true,
+    options: [
+      'Effectiveness in improving health',
+      'Affordability',
+      'Ease of use',
+      'Access to personalized advice',
+      'Comprehensive disease management tools',
+      'Community support features',
+      'Regular updates on medical advancements',
+      'Privacy and data security',
+    ],
+    answer: [],
+  },
+  {
+    slug: 'technology_usage',
+    question: 'How comfortable are you with using healthcare-related technology?',
     isMultipleChoice: true,
     isMultipleSelect: false,
-    options: ['Not interested at all', 'Somewhat interested', 'Very interested'],
+    options: ['Very comfortable', 'Somewhat comfortable', 'Not very comfortable', 'Not comfortable at all'],
     answer: '',
   },
   {
-    slug: 'preferred_healthcare_sources',
-    question: 'Where do you prefer to get information about healthcare advancements? (Select all that apply)',
-    isMultipleChoice: true,
-    isMultipleSelect: true,
-    options: ['Medical journals', 'Health websites', 'Social media', 'News outlets', 'Healthcare professionals'],
-    answer: [],
-  },
-  {
-    slug: 'holistic_wellbeing_practices',
-    question: 'Do you actively practice holistic well-being approaches? (Select all that apply)',
-    isMultipleChoice: true,
-    isMultipleSelect: true,
-    options: ['Yoga', 'Meditation', 'Acupuncture', 'Nutrition', 'Herbal remedies', 'Other'],
-    answer: [],
-  },
-  {
-    slug: 'healthcare_related_hobbies',
-    question: 'Do you have any hobbies related to healthcare or well-being? (Select all that apply)',
-    isMultipleChoice: true,
-    isMultipleSelect: true,
-    options: ['Running', 'Cooking healthy meals', 'Volunteering at healthcare events', 'Fitness training', 'Art therapy'],
-    answer: [],
-  },
-  {
-    slug: 'trusted_healthcare_brands',
-    question: 'Which healthcare or well-being brands do you trust the most? (Select all that apply)',
-    isMultipleChoice: true,
-    isMultipleSelect: true,
-    options: ['Apple', 'Fitbit', 'GNC', "Nature's Way", 'Johnson & Johnson', 'Other'],
-    answer: [],
-  },
-  {
-    slug: 'preferred_healthcare_communities',
-    question: 'Do you actively participate in online or local healthcare communities? (Select all that apply)',
-    isMultipleChoice: true,
-    isMultipleSelect: true,
-    options: ['Health forums', 'Social media groups', 'Local wellness clubs', 'Support groups'],
-    answer: [],
-  },
-  {
-    slug: 'healthcare_goals',
-    question: 'What are your primary healthcare goals? (Select all that apply)',
-    isMultipleChoice: true,
-    isMultipleSelect: true,
-    options: ['Weight management', 'Stress reduction', 'Chronic illness management', 'Lifestyle improvement'],
-    answer: [],
-  },
-  {
-    slug: 'preferred_healthcare_information_format',
-    question: 'How do you prefer to consume healthcare information? (Select all that apply)',
-    isMultipleChoice: true,
-    isMultipleSelect: true,
-    options: ['Articles', 'Videos', 'Podcasts', 'Webinars', 'Infographics'],
-    answer: [],
-  },
-  {
-    slug: 'role_in_healthcare',
-    question: 'What is your role in the healthcare industry, if any?',
+    slug: 'feedback',
+    question: 'Would you be willing to provide feedback to improve healthcare services and products?',
     isMultipleChoice: true,
     isMultipleSelect: false,
-    options: ['Patient', 'Caregiver', 'Healthcare professional', 'Other'],
+    options: ["Yes, I'd be happy to provide feedback", 'No, I prefer not to provide feedback'],
     answer: '',
   },
   {
-    slug: 'healthcare_challenges',
-    question: 'What healthcare challenges do you face in your life? (Select all that apply)',
+    slug: 'sharing_experience',
+    question: 'Are you willing to share your healthcare journey or experiences with others?',
     isMultipleChoice: true,
-    isMultipleSelect: true,
-    options: ['Access to healthcare', 'Managing chronic conditions', 'Balancing work and health', 'Information overload'],
-    answer: [],
+    isMultipleSelect: false,
+    options: ["Yes, I'm open to sharing my experiences", "No, I'd rather keep my experiences private"],
+    answer: '',
+  },
+  {
+    slug: 'support_others',
+    question: 'Would you be interested in supporting others who are facing similar health challenges?',
+    isMultipleChoice: true,
+    isMultipleSelect: false,
+    options: ["Yes, I'd like to support others", 'No, I prefer not to get involved in supporting others'],
+    answer: '',
   },
 ]

@@ -1,11 +1,23 @@
-import { Stack, Typography, Button, TextField, MenuItem, FormControl, InputLabel, Select } from '@mui/material'
-import useForm from '../../../../hooks/useForm'
+import { Button, FormControl, InputLabel, MenuItem, Select, Stack, TextField, Typography } from '@mui/material'
+import { EnumPersonaPersonaType, useUserGeneratePersonaMutation } from '@tokentraction/api-operations'
 import { PersonaQuestion } from '.'
-
+import useForm from '../../../../hooks/useForm'
+import { useAuth } from '../../../../state'
 interface EnvironmentalistFormProps {
   setEnvironmentalistPersonaShown: (open: boolean) => void
+  seLoading: (loading: boolean) => void
 }
-export function EnvironmentalistForm({ setEnvironmentalistPersonaShown }: EnvironmentalistFormProps) {
+export function EnvironmentalistForm({ setEnvironmentalistPersonaShown, seLoading }: EnvironmentalistFormProps) {
+  const { user } = useAuth()
+  const [createPersona] = useUserGeneratePersonaMutation({
+    onCompleted: data => {
+      seLoading(false)
+    },
+    onError: error => {
+      console.log(error)
+      seLoading(false)
+    },
+  })
   const sampleAnswers: Record<string, string | string[]> = {
     environmental_interest_level: '',
     sustainability_practices: [],
@@ -64,8 +76,26 @@ export function EnvironmentalistForm({ setEnvironmentalistPersonaShown }: Enviro
           color="primary"
           disabled={!valueExists(Object.keys(sampleAnswers))}
           onClick={() => {
+            seLoading(true)
             setEnvironmentalistPersonaShown(false)
-            // createOrganization(state as CreateOneOrganizationInput)
+            const questions = environmentalPersonaQuestions.reduce((acc: string, question: PersonaQuestion) => {
+              if (question.isMultipleSelect) {
+                if (Array.isArray(state[question.slug])) {
+                  return acc + question.question + ':' + state[question.slug].join(',') + ';'
+                }
+              } else {
+                return acc + question.question + ':' + state[question.slug] + ';'
+              }
+              return acc
+            }, '')
+            createPersona({
+              variables: {
+                userGeneratePersonaId: user?._id,
+                type: EnumPersonaPersonaType.Environmentalist,
+                questions,
+                theme: 'Environmental Enthusiast Persona',
+              },
+            })
           }}
         >
           Create

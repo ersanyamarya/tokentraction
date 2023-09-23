@@ -8,3 +8,26 @@ mutation UserUpdate($userUpdateId: MongoID!, $record: UpdateOneUserInput!) {
     _id
   }
 }
+
+mutation UserGeneratePersona(
+  $userGeneratePersonaId: MongoID!
+  $type: EnumPersonaPersonaType!
+  $questions: String!
+  $theme: String
+) {
+  userGeneratePersona(id: $userGeneratePersonaId, type: $type, questions: $questions, theme: $theme) {
+    personaType
+    userId
+    name
+    age
+    gender
+    location
+    needs
+    goals
+    painPoints
+    expectations
+    _id
+    createdAt
+    updatedAt
+  }
+}

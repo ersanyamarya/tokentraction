@@ -20,6 +20,33 @@ export type Scalars = {
   MongoID: { input: any; output: any; }
 };
 
+export type CreateManyPersonaInput = {
+  age?: InputMaybe<Scalars['Float']['input']>;
+  createdAt?: InputMaybe<Scalars['Date']['input']>;
+  expectations?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  gender?: InputMaybe<Scalars['String']['input']>;
+  goals?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  location?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  needs?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  painPoints?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  personaType: EnumPersonaPersonaType;
+  updatedAt?: InputMaybe<Scalars['Date']['input']>;
+  userId?: InputMaybe<Scalars['MongoID']['input']>;
+};
+
+export type CreateManyPersonaPayload = {
+  __typename?: 'CreateManyPersonaPayload';
+  /** Number of created documents */
+  createdCount: Scalars['Int']['output'];
+  /** Error that may occur during operation. If you request this field in GraphQL query, you will receive typed error in payload; otherwise error will be provided in root `errors` field of GraphQL response. */
+  error?: Maybe<ErrorInterface>;
+  /** Documents IDs */
+  recordIds: Array<Scalars['MongoID']['output']>;
+  /** Created documents */
+  records?: Maybe<Array<Persona>>;
+};
+
 export type CreateOneOrganizationInput = {
   city?: InputMaybe<Scalars['String']['input']>;
   country?: InputMaybe<Scalars['String']['input']>;
@@ -35,6 +62,31 @@ export type CreateOneOrganizationInput = {
   typeOfOrganization?: InputMaybe<Array<InputMaybe<EnumOrganizationTypeOfOrganization>>>;
   updatedAt?: InputMaybe<Scalars['Date']['input']>;
   website?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CreateOnePersonaInput = {
+  age?: InputMaybe<Scalars['Float']['input']>;
+  createdAt?: InputMaybe<Scalars['Date']['input']>;
+  expectations?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  gender?: InputMaybe<Scalars['String']['input']>;
+  goals?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  location?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  needs?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  painPoints?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  personaType: EnumPersonaPersonaType;
+  updatedAt?: InputMaybe<Scalars['Date']['input']>;
+  userId?: InputMaybe<Scalars['MongoID']['input']>;
+};
+
+export type CreateOnePersonaPayload = {
+  __typename?: 'CreateOnePersonaPayload';
+  /** Error that may occur during operation. If you request this field in GraphQL query, you will receive typed error in payload; otherwise error will be provided in root `errors` field of GraphQL response. */
+  error?: Maybe<ErrorInterface>;
+  /** Created document */
+  record?: Maybe<Persona>;
+  /** Document ID */
+  recordId?: Maybe<Scalars['MongoID']['output']>;
 };
 
 export enum EnumOrganizationIndustry {
@@ -136,6 +188,12 @@ export enum EnumOrganizationTypeOfOrganization {
   Other = 'Other',
   SmallBusiness = 'Small_Business',
   Startup = 'Startup'
+}
+
+export enum EnumPersonaPersonaType {
+  Entrepreneur = 'Entrepreneur',
+  Environmentalist = 'Environmentalist',
+  HealthCare = 'HealthCare'
 }
 
 export enum EnumUserAccessibilityNeeds {
@@ -359,6 +417,102 @@ export type ErrorInterface = {
   message?: Maybe<Scalars['String']['output']>;
 };
 
+export type FilterCountPersonaInput = {
+  AND?: InputMaybe<Array<FilterCountPersonaInput>>;
+  OR?: InputMaybe<Array<FilterCountPersonaInput>>;
+  _id?: InputMaybe<Scalars['MongoID']['input']>;
+  /** List of *indexed* fields that can be filtered via operators. */
+  _operators?: InputMaybe<FilterCountPersonaOperatorsInput>;
+  age?: InputMaybe<Scalars['Float']['input']>;
+  createdAt?: InputMaybe<Scalars['Date']['input']>;
+  expectations?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  gender?: InputMaybe<Scalars['String']['input']>;
+  goals?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  location?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  needs?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  painPoints?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  personaType?: InputMaybe<EnumPersonaPersonaType>;
+  updatedAt?: InputMaybe<Scalars['Date']['input']>;
+  userId?: InputMaybe<Scalars['MongoID']['input']>;
+};
+
+/** For performance reason this type contains only *indexed* fields. */
+export type FilterCountPersonaOperatorsInput = {
+  _id?: InputMaybe<FilterCountPersona_IdOperatorsInput>;
+  personaType?: InputMaybe<FilterCountPersonaPersonaTypeOperatorsInput>;
+};
+
+export type FilterCountPersonaPersonaTypeOperatorsInput = {
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+  gt?: InputMaybe<EnumPersonaPersonaType>;
+  gte?: InputMaybe<EnumPersonaPersonaType>;
+  in?: InputMaybe<Array<InputMaybe<EnumPersonaPersonaType>>>;
+  lt?: InputMaybe<EnumPersonaPersonaType>;
+  lte?: InputMaybe<EnumPersonaPersonaType>;
+  ne?: InputMaybe<EnumPersonaPersonaType>;
+  nin?: InputMaybe<Array<InputMaybe<EnumPersonaPersonaType>>>;
+};
+
+export type FilterCountPersona_IdOperatorsInput = {
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+  gt?: InputMaybe<Scalars['MongoID']['input']>;
+  gte?: InputMaybe<Scalars['MongoID']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['MongoID']['input']>>>;
+  lt?: InputMaybe<Scalars['MongoID']['input']>;
+  lte?: InputMaybe<Scalars['MongoID']['input']>;
+  ne?: InputMaybe<Scalars['MongoID']['input']>;
+  nin?: InputMaybe<Array<InputMaybe<Scalars['MongoID']['input']>>>;
+};
+
+export type FilterFindManyPersonaInput = {
+  AND?: InputMaybe<Array<FilterFindManyPersonaInput>>;
+  OR?: InputMaybe<Array<FilterFindManyPersonaInput>>;
+  _id?: InputMaybe<Scalars['MongoID']['input']>;
+  /** List of *indexed* fields that can be filtered via operators. */
+  _operators?: InputMaybe<FilterFindManyPersonaOperatorsInput>;
+  age?: InputMaybe<Scalars['Float']['input']>;
+  createdAt?: InputMaybe<Scalars['Date']['input']>;
+  expectations?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  gender?: InputMaybe<Scalars['String']['input']>;
+  goals?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  location?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  needs?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  painPoints?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  personaType?: InputMaybe<EnumPersonaPersonaType>;
+  updatedAt?: InputMaybe<Scalars['Date']['input']>;
+  userId?: InputMaybe<Scalars['MongoID']['input']>;
+};
+
+/** For performance reason this type contains only *indexed* fields. */
+export type FilterFindManyPersonaOperatorsInput = {
+  _id?: InputMaybe<FilterFindManyPersona_IdOperatorsInput>;
+  personaType?: InputMaybe<FilterFindManyPersonaPersonaTypeOperatorsInput>;
+};
+
+export type FilterFindManyPersonaPersonaTypeOperatorsInput = {
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+  gt?: InputMaybe<EnumPersonaPersonaType>;
+  gte?: InputMaybe<EnumPersonaPersonaType>;
+  in?: InputMaybe<Array<InputMaybe<EnumPersonaPersonaType>>>;
+  lt?: InputMaybe<EnumPersonaPersonaType>;
+  lte?: InputMaybe<EnumPersonaPersonaType>;
+  ne?: InputMaybe<EnumPersonaPersonaType>;
+  nin?: InputMaybe<Array<InputMaybe<EnumPersonaPersonaType>>>;
+};
+
+export type FilterFindManyPersona_IdOperatorsInput = {
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+  gt?: InputMaybe<Scalars['MongoID']['input']>;
+  gte?: InputMaybe<Scalars['MongoID']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['MongoID']['input']>>>;
+  lt?: InputMaybe<Scalars['MongoID']['input']>;
+  lte?: InputMaybe<Scalars['MongoID']['input']>;
+  ne?: InputMaybe<Scalars['MongoID']['input']>;
+  nin?: InputMaybe<Array<InputMaybe<Scalars['MongoID']['input']>>>;
+};
+
 export type MongoError = ErrorInterface & {
   __typename?: 'MongoError';
   /** MongoDB error code */
@@ -370,9 +524,19 @@ export type MongoError = ErrorInterface & {
 export type Mutation = {
   __typename?: 'Mutation';
   AdminOrganizationRemoveAll?: Maybe<Scalars['Boolean']['output']>;
+  AdminPersonaRemoveAll?: Maybe<Scalars['Boolean']['output']>;
   AdminUserRemoveAll?: Maybe<Scalars['Boolean']['output']>;
   organizationCreate?: Maybe<Organization>;
+  /** Creates Many documents with mongoose defaults, setters, hooks and validation */
+  personaBatchCreate?: Maybe<CreateManyPersonaPayload>;
+  /** Create one document with mongoose defaults, setters, hooks and validation */
+  personaCreate?: Maybe<CreateOnePersonaPayload>;
+  /** Remove one document: 1) Retrieve one document and remove with hooks via findByIdAndRemove. 2) Return removed document. */
+  personaDelete?: Maybe<RemoveByIdPersonaPayload>;
+  /** Update one document: 1) Retrieve one document by findById. 2) Apply updates to mongoose document. 3) Mongoose applies defaults, setters, hooks and validation. 4) And save it. */
+  personaUpdate?: Maybe<UpdateByIdPersonaPayload>;
   userCreate?: Maybe<User>;
+  userGeneratePersona?: Maybe<Persona>;
   userUpdate?: Maybe<User>;
 };
 
@@ -383,10 +547,39 @@ export type MutationOrganizationCreateArgs = {
 };
 
 
+export type MutationPersonaBatchCreateArgs = {
+  records: Array<CreateManyPersonaInput>;
+};
+
+
+export type MutationPersonaCreateArgs = {
+  record: CreateOnePersonaInput;
+};
+
+
+export type MutationPersonaDeleteArgs = {
+  _id: Scalars['MongoID']['input'];
+};
+
+
+export type MutationPersonaUpdateArgs = {
+  _id: Scalars['MongoID']['input'];
+  record: UpdateByIdPersonaInput;
+};
+
+
 export type MutationUserCreateArgs = {
   displayName: Scalars['String']['input'];
   pictureUrl?: InputMaybe<Scalars['String']['input']>;
   walletAddress: Scalars['String']['input'];
+};
+
+
+export type MutationUserGeneratePersonaArgs = {
+  id: Scalars['MongoID']['input'];
+  questions: Scalars['String']['input'];
+  theme?: InputMaybe<Scalars['String']['input']>;
+  type: EnumPersonaPersonaType;
 };
 
 
@@ -425,9 +618,51 @@ export type OrganizationMembersInput = {
   user?: InputMaybe<Scalars['MongoID']['input']>;
 };
 
+export type PaginationInfo = {
+  __typename?: 'PaginationInfo';
+  currentPage: Scalars['Int']['output'];
+  hasNextPage?: Maybe<Scalars['Boolean']['output']>;
+  hasPreviousPage?: Maybe<Scalars['Boolean']['output']>;
+  itemCount?: Maybe<Scalars['Int']['output']>;
+  pageCount?: Maybe<Scalars['Int']['output']>;
+  perPage: Scalars['Int']['output'];
+};
+
+export type Persona = {
+  __typename?: 'Persona';
+  _id: Scalars['MongoID']['output'];
+  age?: Maybe<Scalars['Float']['output']>;
+  createdAt?: Maybe<Scalars['Date']['output']>;
+  expectations?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  gender?: Maybe<Scalars['String']['output']>;
+  goals?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  location?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  needs?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  painPoints?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  personaType: EnumPersonaPersonaType;
+  updatedAt?: Maybe<Scalars['Date']['output']>;
+  userId?: Maybe<Scalars['MongoID']['output']>;
+};
+
+/** List of items with pagination. */
+export type PersonaPagination = {
+  __typename?: 'PersonaPagination';
+  /** Total object count. */
+  count?: Maybe<Scalars['Int']['output']>;
+  /** Array of objects. */
+  items?: Maybe<Array<Persona>>;
+  /** Information to aid in pagination. */
+  pageInfo: PaginationInfo;
+};
+
 export type Query = {
   __typename?: 'Query';
   organizationList?: Maybe<Array<Maybe<Organization>>>;
+  personaCount?: Maybe<Scalars['Int']['output']>;
+  personaList: Array<Persona>;
+  personaPagination?: Maybe<PersonaPagination>;
+  personaRead?: Maybe<Persona>;
   userConnectWallet?: Maybe<User>;
 };
 
@@ -437,8 +672,44 @@ export type QueryOrganizationListArgs = {
 };
 
 
+export type QueryPersonaCountArgs = {
+  filter?: InputMaybe<FilterCountPersonaInput>;
+};
+
+
+export type QueryPersonaListArgs = {
+  filter?: InputMaybe<FilterFindManyPersonaInput>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  sort?: InputMaybe<SortFindManyPersonaInput>;
+};
+
+
+export type QueryPersonaPaginationArgs = {
+  filter?: InputMaybe<FilterFindManyPersonaInput>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  perPage?: InputMaybe<Scalars['Int']['input']>;
+  sort?: InputMaybe<SortFindManyPersonaInput>;
+};
+
+
+export type QueryPersonaReadArgs = {
+  _id: Scalars['MongoID']['input'];
+};
+
+
 export type QueryUserConnectWalletArgs = {
   walletAddress: Scalars['String']['input'];
+};
+
+export type RemoveByIdPersonaPayload = {
+  __typename?: 'RemoveByIdPersonaPayload';
+  /** Error that may occur during operation. If you request this field in GraphQL query, you will receive typed error in payload; otherwise error will be provided in root `errors` field of GraphQL response. */
+  error?: Maybe<ErrorInterface>;
+  /** Removed document */
+  record?: Maybe<Persona>;
+  /** Document ID */
+  recordId?: Maybe<Scalars['MongoID']['output']>;
 };
 
 export type RuntimeError = ErrorInterface & {
@@ -453,6 +724,40 @@ export enum SortFindManyOrganizationInput {
   IdAsc = '_ID_ASC',
   IdDesc = '_ID_DESC'
 }
+
+export enum SortFindManyPersonaInput {
+  PersonatypeAsc = 'PERSONATYPE_ASC',
+  PersonatypeDesc = 'PERSONATYPE_DESC',
+  PersonatypeUseridAsc = 'PERSONATYPE__USERID_ASC',
+  PersonatypeUseridDesc = 'PERSONATYPE__USERID_DESC',
+  IdAsc = '_ID_ASC',
+  IdDesc = '_ID_DESC'
+}
+
+export type UpdateByIdPersonaInput = {
+  age?: InputMaybe<Scalars['Float']['input']>;
+  createdAt?: InputMaybe<Scalars['Date']['input']>;
+  expectations?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  gender?: InputMaybe<Scalars['String']['input']>;
+  goals?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  location?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  needs?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  painPoints?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  personaType?: InputMaybe<EnumPersonaPersonaType>;
+  updatedAt?: InputMaybe<Scalars['Date']['input']>;
+  userId?: InputMaybe<Scalars['MongoID']['input']>;
+};
+
+export type UpdateByIdPersonaPayload = {
+  __typename?: 'UpdateByIdPersonaPayload';
+  /** Error that may occur during operation. If you request this field in GraphQL query, you will receive typed error in payload; otherwise error will be provided in root `errors` field of GraphQL response. */
+  error?: Maybe<ErrorInterface>;
+  /** Updated document */
+  record?: Maybe<Persona>;
+  /** Document ID */
+  recordId?: Maybe<Scalars['MongoID']['output']>;
+};
 
 export type UpdateOneUserInput = {
   accessibilityNeeds?: InputMaybe<EnumUserAccessibilityNeeds>;
@@ -567,12 +872,29 @@ export type UserUpdateMutationVariables = Exact<{
 
 export type UserUpdateMutation = { __typename?: 'Mutation', userUpdate?: { __typename?: 'User', _id: any } | null };
 
+export type UserGeneratePersonaMutationVariables = Exact<{
+  userGeneratePersonaId: Scalars['MongoID']['input'];
+  type: EnumPersonaPersonaType;
+  questions: Scalars['String']['input'];
+  theme?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type UserGeneratePersonaMutation = { __typename?: 'Mutation', userGeneratePersona?: { __typename?: 'Persona', personaType: EnumPersonaPersonaType, userId?: any | null, name?: string | null, age?: number | null, gender?: string | null, location?: string | null, needs?: Array<string | null> | null, goals?: Array<string | null> | null, painPoints?: Array<string | null> | null, expectations?: Array<string | null> | null, _id: any, createdAt?: any | null, updatedAt?: any | null } | null };
+
 export type UserConnectWalletQueryVariables = Exact<{
   walletAddress: Scalars['String']['input'];
 }>;
 
 
 export type UserConnectWalletQuery = { __typename?: 'Query', userConnectWallet?: { __typename?: 'User', walletAddress: string, displayName: string, pictureUrl?: string | null, age?: number | null, country?: string | null, state?: string | null, city?: string | null, gender?: EnumUserGender | null, languages?: Array<EnumUserLanguages | null> | null, maritalStatus?: EnumUserMaritalStatus | null, householdSize?: number | null, householdIncome?: EnumUserHouseholdIncome | null, employmentStatus?: EnumUserEmploymentStatus | null, employmentIndustry?: EnumUserEmploymentIndustry | null, religion?: string | null, politicalAffiliation?: EnumUserPoliticalAffiliation | null, accessibilityNeeds?: EnumUserAccessibilityNeeds | null, healthStatus?: EnumUserHealthStatus | null, veteranStatus?: EnumUserVeteranStatus | null, skills?: Array<EnumUserSkills | null> | null, techSkills?: Array<EnumUserTechSkills | null> | null, education?: Array<EnumUserEducation | null> | null, workExperience?: Array<EnumUserWorkExperience | null> | null, interests?: Array<EnumUserInterests | null> | null, _id: any, createdAt?: any | null, updatedAt?: any | null, organizations: Array<{ __typename?: 'Organization', name: string, website?: string | null, pictureUrl?: string | null, description?: string | null, _id: any }> } | null };
+
+export type PersonaListQueryVariables = Exact<{
+  filter?: InputMaybe<FilterFindManyPersonaInput>;
+}>;
+
+
+export type PersonaListQuery = { __typename?: 'Query', personaList: Array<{ __typename?: 'Persona', personaType: EnumPersonaPersonaType, userId?: any | null, name?: string | null, age?: number | null, gender?: string | null, location?: string | null, needs?: Array<string | null> | null, goals?: Array<string | null> | null, painPoints?: Array<string | null> | null, expectations?: Array<string | null> | null, _id: any, createdAt?: any | null, updatedAt?: any | null }> };
 
 
 export const OrganizationCreateDocument = gql`
@@ -682,6 +1004,59 @@ export function useUserUpdateMutation(baseOptions?: Apollo.MutationHookOptions<U
 export type UserUpdateMutationHookResult = ReturnType<typeof useUserUpdateMutation>;
 export type UserUpdateMutationResult = Apollo.MutationResult<UserUpdateMutation>;
 export type UserUpdateMutationOptions = Apollo.BaseMutationOptions<UserUpdateMutation, UserUpdateMutationVariables>;
+export const UserGeneratePersonaDocument = gql`
+    mutation UserGeneratePersona($userGeneratePersonaId: MongoID!, $type: EnumPersonaPersonaType!, $questions: String!, $theme: String) {
+  userGeneratePersona(
+    id: $userGeneratePersonaId
+    type: $type
+    questions: $questions
+    theme: $theme
+  ) {
+    personaType
+    userId
+    name
+    age
+    gender
+    location
+    needs
+    goals
+    painPoints
+    expectations
+    _id
+    createdAt
+    updatedAt
+  }
+}
+    `;
+export type UserGeneratePersonaMutationFn = Apollo.MutationFunction<UserGeneratePersonaMutation, UserGeneratePersonaMutationVariables>;
+
+/**
+ * __useUserGeneratePersonaMutation__
+ *
+ * To run a mutation, you first call `useUserGeneratePersonaMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUserGeneratePersonaMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [userGeneratePersonaMutation, { data, loading, error }] = useUserGeneratePersonaMutation({
+ *   variables: {
+ *      userGeneratePersonaId: // value for 'userGeneratePersonaId'
+ *      type: // value for 'type'
+ *      questions: // value for 'questions'
+ *      theme: // value for 'theme'
+ *   },
+ * });
+ */
+export function useUserGeneratePersonaMutation(baseOptions?: Apollo.MutationHookOptions<UserGeneratePersonaMutation, UserGeneratePersonaMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UserGeneratePersonaMutation, UserGeneratePersonaMutationVariables>(UserGeneratePersonaDocument, options);
+      }
+export type UserGeneratePersonaMutationHookResult = ReturnType<typeof useUserGeneratePersonaMutation>;
+export type UserGeneratePersonaMutationResult = Apollo.MutationResult<UserGeneratePersonaMutation>;
+export type UserGeneratePersonaMutationOptions = Apollo.BaseMutationOptions<UserGeneratePersonaMutation, UserGeneratePersonaMutationVariables>;
 export const UserConnectWalletDocument = gql`
     query UserConnectWallet($walletAddress: String!) {
   userConnectWallet(walletAddress: $walletAddress) {
@@ -750,3 +1125,50 @@ export function useUserConnectWalletLazyQuery(baseOptions?: Apollo.LazyQueryHook
 export type UserConnectWalletQueryHookResult = ReturnType<typeof useUserConnectWalletQuery>;
 export type UserConnectWalletLazyQueryHookResult = ReturnType<typeof useUserConnectWalletLazyQuery>;
 export type UserConnectWalletQueryResult = Apollo.QueryResult<UserConnectWalletQuery, UserConnectWalletQueryVariables>;
+export const PersonaListDocument = gql`
+    query PersonaList($filter: FilterFindManyPersonaInput) {
+  personaList(filter: $filter) {
+    personaType
+    userId
+    name
+    age
+    gender
+    location
+    needs
+    goals
+    painPoints
+    expectations
+    _id
+    createdAt
+    updatedAt
+  }
+}
+    `;
+
+/**
+ * __usePersonaListQuery__
+ *
+ * To run a query within a React component, call `usePersonaListQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePersonaListQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePersonaListQuery({
+ *   variables: {
+ *      filter: // value for 'filter'
+ *   },
+ * });
+ */
+export function usePersonaListQuery(baseOptions?: Apollo.QueryHookOptions<PersonaListQuery, PersonaListQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PersonaListQuery, PersonaListQueryVariables>(PersonaListDocument, options);
+      }
+export function usePersonaListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PersonaListQuery, PersonaListQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PersonaListQuery, PersonaListQueryVariables>(PersonaListDocument, options);
+        }
+export type PersonaListQueryHookResult = ReturnType<typeof usePersonaListQuery>;
+export type PersonaListLazyQueryHookResult = ReturnType<typeof usePersonaListLazyQuery>;
+export type PersonaListQueryResult = Apollo.QueryResult<PersonaListQuery, PersonaListQueryVariables>;

@@ -15,7 +15,6 @@ export const PersonaSchema = new Schema(
     age: Number,
     gender: String,
     location: String,
-    summary: String,
     needs: [String],
     goals: [String],
     painPoints: [String],
