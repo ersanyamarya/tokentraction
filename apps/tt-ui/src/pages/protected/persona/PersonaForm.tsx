@@ -318,14 +318,16 @@ export function PersonaForm({ persona, savePersona }: PersonaFormProps) {
       <Button
         variant="contained"
         onClick={() => {
-          delete state.__typename
-          delete state._id
-          delete state.createdAt
-          delete state.updatedAt
-          state.age = Number(state.age)
-          state.householdSize = Number(state.householdSize)
+          const stateNew = { ...state }
+          delete stateNew.__typename
+          delete stateNew._id
+          delete stateNew.createdAt
+          delete stateNew.updatedAt
+          delete stateNew.organizations
+          stateNew.age = Number(stateNew.age)
+          stateNew.householdSize = Number(stateNew.householdSize)
 
-          savePersona(state as User)
+          savePersona(stateNew as User)
         }}
       >
         Save
