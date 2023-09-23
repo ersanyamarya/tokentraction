@@ -542,6 +542,14 @@ export type ValidatorError = {
   value?: Maybe<Scalars['JSON']['output']>;
 };
 
+export type OrganizationCreateMutationVariables = Exact<{
+  record: CreateOneOrganizationInput;
+  userId: Scalars['MongoID']['input'];
+}>;
+
+
+export type OrganizationCreateMutation = { __typename?: 'Mutation', organizationCreate?: { __typename?: 'Organization', _id: any } | null };
+
 export type UserCreateMutationVariables = Exact<{
   walletAddress: Scalars['String']['input'];
   pictureUrl?: InputMaybe<Scalars['String']['input']>;
@@ -567,6 +575,40 @@ export type UserConnectWalletQueryVariables = Exact<{
 export type UserConnectWalletQuery = { __typename?: 'Query', userConnectWallet?: { __typename?: 'User', walletAddress: string, displayName: string, pictureUrl?: string | null, age?: number | null, country?: string | null, state?: string | null, city?: string | null, gender?: EnumUserGender | null, languages?: Array<EnumUserLanguages | null> | null, maritalStatus?: EnumUserMaritalStatus | null, householdSize?: number | null, householdIncome?: EnumUserHouseholdIncome | null, employmentStatus?: EnumUserEmploymentStatus | null, employmentIndustry?: EnumUserEmploymentIndustry | null, religion?: string | null, politicalAffiliation?: EnumUserPoliticalAffiliation | null, accessibilityNeeds?: EnumUserAccessibilityNeeds | null, healthStatus?: EnumUserHealthStatus | null, veteranStatus?: EnumUserVeteranStatus | null, skills?: Array<EnumUserSkills | null> | null, techSkills?: Array<EnumUserTechSkills | null> | null, education?: Array<EnumUserEducation | null> | null, workExperience?: Array<EnumUserWorkExperience | null> | null, interests?: Array<EnumUserInterests | null> | null, _id: any, createdAt?: any | null, updatedAt?: any | null, organizations: Array<{ __typename?: 'Organization', name: string, website?: string | null, pictureUrl?: string | null, _id: any }> } | null };
 
 
+export const OrganizationCreateDocument = gql`
+    mutation OrganizationCreate($record: CreateOneOrganizationInput!, $userId: MongoID!) {
+  organizationCreate(record: $record, userId: $userId) {
+    _id
+  }
+}
+    `;
+export type OrganizationCreateMutationFn = Apollo.MutationFunction<OrganizationCreateMutation, OrganizationCreateMutationVariables>;
+
+/**
+ * __useOrganizationCreateMutation__
+ *
+ * To run a mutation, you first call `useOrganizationCreateMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useOrganizationCreateMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [organizationCreateMutation, { data, loading, error }] = useOrganizationCreateMutation({
+ *   variables: {
+ *      record: // value for 'record'
+ *      userId: // value for 'userId'
+ *   },
+ * });
+ */
+export function useOrganizationCreateMutation(baseOptions?: Apollo.MutationHookOptions<OrganizationCreateMutation, OrganizationCreateMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<OrganizationCreateMutation, OrganizationCreateMutationVariables>(OrganizationCreateDocument, options);
+      }
+export type OrganizationCreateMutationHookResult = ReturnType<typeof useOrganizationCreateMutation>;
+export type OrganizationCreateMutationResult = Apollo.MutationResult<OrganizationCreateMutation>;
+export type OrganizationCreateMutationOptions = Apollo.BaseMutationOptions<OrganizationCreateMutation, OrganizationCreateMutationVariables>;
 export const UserCreateDocument = gql`
     mutation UserCreate($walletAddress: String!, $pictureUrl: String, $displayName: String!) {
   userCreate(

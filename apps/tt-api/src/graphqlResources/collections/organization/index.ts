@@ -48,13 +48,10 @@ OrganizationTC.addResolver({
     userId: 'MongoID!',
   },
   resolve: async ({ args }) => {
-    const { name, description, typeOfOrganization, location, userId } = args
+    const { record, userId } = args
     try {
       return await OrganizationModel.create({
-        name,
-        description,
-        typeOfOrganization,
-        location,
+        ...record,
         members: [{ user: userId, role: 'Admin' }],
       })
     } catch (err) {

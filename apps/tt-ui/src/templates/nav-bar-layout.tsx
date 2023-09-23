@@ -72,7 +72,13 @@ export function NavBarLayout() {
         >
           <AppBar elevation={1}>
             <Toolbar>
-              <Box component="img" src="/text_logo.svg" alt="Token Traction Logo" height="100%" />
+              <Box
+                component="img"
+                src="/text_logo.svg"
+                alt="Token Traction Logo"
+                height="100%"
+                onClick={() => navigate('/app')}
+              />
               <Tooltip title={user.displayName}>
                 <IconButton onClick={() => navigate('/app/persona')}>
                   <Avatar sx={{ marginLeft: 'auto' }} src={user.pictureUrl || ''} />

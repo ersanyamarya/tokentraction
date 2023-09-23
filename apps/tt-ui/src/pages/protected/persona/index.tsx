@@ -84,7 +84,7 @@ export function PersonaPage() {
               <OrganizationsTab persona={persona} />
             </CustomTabPanel>
             <CustomTabPanel value={value} index={1}>
-              <OrganizationsTab persona={persona} />
+              {/* <OrganizationsTab persona={persona} /> */}
             </CustomTabPanel>
           </Box>
         </>

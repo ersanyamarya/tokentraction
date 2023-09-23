@@ -114,7 +114,7 @@ export function PersonaForm({ persona, savePersona }: PersonaFormProps) {
           })}
         >
           {Object.keys(EnumUserMaritalStatus).map((key: string) => (
-            <MenuItem key={key} value={key}>
+            <MenuItem key={key} value={EnumUserMaritalStatus[key as keyof typeof EnumUserMaritalStatus]}>
               {key}
             </MenuItem>
           ))}
@@ -318,14 +318,7 @@ export function PersonaForm({ persona, savePersona }: PersonaFormProps) {
       <Button
         variant="contained"
         onClick={() => {
-          const stateNew = { ...state }
-          delete stateNew.__typename
-          delete stateNew._id
-          delete stateNew.createdAt
-          delete stateNew.updatedAt
-          delete stateNew.organizations
-          stateNew.age = Number(stateNew.age)
-          stateNew.householdSize = Number(stateNew.householdSize)
+          const stateNew = getCleanState(state)
 
           savePersona(stateNew as User)
         }}
@@ -334,4 +327,15 @@ export function PersonaForm({ persona, savePersona }: PersonaFormProps) {
       </Button>
     </Stack>
   )
+}
+function getCleanState(state: Record<string, any>) {
+  const stateNew = { ...state }
+  delete stateNew.__typename
+  delete stateNew._id
+  delete stateNew.createdAt
+  delete stateNew.updatedAt
+  delete stateNew.organizations
+  stateNew.age = Number(stateNew.age)
+  stateNew.householdSize = Number(stateNew.householdSize)
+  return stateNew
 }

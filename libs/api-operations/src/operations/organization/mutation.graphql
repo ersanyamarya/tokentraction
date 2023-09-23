@@ -1,0 +1,5 @@
+mutation OrganizationCreate($record: CreateOneOrganizationInput!, $userId: MongoID!) {
+  organizationCreate(record: $record, userId: $userId) {
+    _id
+  }
+}
