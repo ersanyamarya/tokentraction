@@ -45,6 +45,14 @@ const defaultUser: User = {
   createdAt: null,
   updatedAt: null,
   __typename: 'User',
+  organizations: [
+    {
+      _id: '',
+      name: '',
+      pictureUrl: '',
+      website: '',
+    },
+  ],
 }
 
 export const useAuthStore = create(

@@ -36,7 +36,6 @@ const OrganizationSchema = new Schema(
         'Small Business',
         'Other',
       ],
-      required: true,
     },
     industry: {
       type: [String],
@@ -58,7 +57,6 @@ const OrganizationSchema = new Schema(
         'Media',
         'Other',
       ],
-      required: true,
     },
     techStack: {
       type: [String],
@@ -120,7 +118,6 @@ const OrganizationSchema = new Schema(
     size: {
       type: String,
       enum: ['1-10', '11-50', '51-200', '201-500', '501-1000', '1001-5000', '5001-10000', '10000+'],
-      required: true,
     },
     country: String,
     state: String,

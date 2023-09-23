@@ -76,16 +76,12 @@
             "name": "industry",
             "description": null,
             "type": {
-              "kind": "NON_NULL",
+              "kind": "LIST",
               "name": null,
               "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "ENUM",
-                  "name": "EnumOrganizationIndustry",
-                  "ofType": null
-                }
+                "kind": "ENUM",
+                "name": "EnumOrganizationIndustry",
+                "ofType": null
               }
             },
             "defaultValue": null,
@@ -140,13 +136,9 @@
             "name": "size",
             "description": null,
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "ENUM",
-                "name": "EnumOrganizationSize",
-                "ofType": null
-              }
+              "kind": "ENUM",
+              "name": "EnumOrganizationSize",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -184,16 +176,12 @@
             "name": "typeOfOrganization",
             "description": null,
             "type": {
-              "kind": "NON_NULL",
+              "kind": "LIST",
               "name": null,
               "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "ENUM",
-                  "name": "EnumOrganizationTypeOfOrganization",
-                  "ofType": null
-                }
+                "kind": "ENUM",
+                "name": "EnumOrganizationTypeOfOrganization",
+                "ofType": null
               }
             },
             "defaultValue": null,
@@ -2377,16 +2365,12 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "NON_NULL",
+              "kind": "LIST",
               "name": null,
               "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "ENUM",
-                  "name": "EnumOrganizationIndustry",
-                  "ofType": null
-                }
+                "kind": "ENUM",
+                "name": "EnumOrganizationIndustry",
+                "ofType": null
               }
             },
             "isDeprecated": false,
@@ -2401,7 +2385,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "OrganizationMembers",
+                "name": "OrganizationAllMembers",
                 "ofType": null
               }
             },
@@ -2441,13 +2425,9 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "ENUM",
-                "name": "EnumOrganizationSize",
-                "ofType": null
-              }
+              "kind": "ENUM",
+              "name": "EnumOrganizationSize",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -2485,16 +2465,12 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "NON_NULL",
+              "kind": "LIST",
               "name": null,
               "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "ENUM",
-                  "name": "EnumOrganizationTypeOfOrganization",
-                  "ofType": null
-                }
+                "kind": "ENUM",
+                "name": "EnumOrganizationTypeOfOrganization",
+                "ofType": null
               }
             },
             "isDeprecated": false,
@@ -2532,7 +2508,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "OrganizationMembers",
+        "name": "OrganizationAllMembers",
         "description": null,
         "fields": [
           {
@@ -2540,8 +2516,8 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "ENUM",
-              "name": "EnumOrganizationMembersRole",
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "isDeprecated": false,
@@ -2552,8 +2528,8 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "MongoID",
+              "kind": "OBJECT",
+              "name": "User",
               "ofType": null
             },
             "isDeprecated": false,
@@ -2696,6 +2672,41 @@
           }
         ],
         "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "SortFindManyOrganizationInput",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "NAME_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "NAME_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "_ID_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "_ID_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
         "possibleTypes": null
       },
       {
@@ -3280,6 +3291,67 @@
               "kind": "ENUM",
               "name": "EnumUserMaritalStatus",
               "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "organizations",
+            "description": null,
+            "args": [
+              {
+                "name": "limit",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": "100",
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "skip",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "sort",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "SortFindManyOrganizationInput",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "Organization",
+                    "ofType": null
+                  }
+                }
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null

@@ -1,8 +1,16 @@
 import { GQLErrorHandler } from '@ersanyamarya/apollo-graphql-helper'
-import { UserModel } from '@tokentraction/mongodb'
+import { UserModel, OrganizationModel } from '@tokentraction/mongodb'
 import { composeMongoose } from 'graphql-compose-mongoose'
-
+import OrganizationResource from '../organization'
 const UserTC = composeMongoose(UserModel, {})
+
+UserTC.addRelation('organizations', {
+  resolver: () => OrganizationResource.ResourceTC.mongooseResolvers.findMany(),
+  prepareArgs: {
+    filter: source => ({ 'members.user': source._id }),
+  },
+  projection: { _id: true },
+})
 
 UserTC.addResolver({
   kind: 'query',

@@ -1,7 +1,28 @@
 import { GQLErrorHandler } from '@ersanyamarya/apollo-graphql-helper'
 import { OrganizationModel } from '@tokentraction/mongodb'
 import { composeMongoose } from 'graphql-compose-mongoose'
+import UserResource from '../user'
+import { schemaComposer } from 'graphql-compose'
 const OrganizationTC = composeMongoose(OrganizationModel, {})
+
+const OrganizationAllMembers = schemaComposer.createObjectTC({
+  name: 'OrganizationAllMembers',
+  fields: {
+    user: 'User',
+    role: 'String',
+  },
+})
+
+OrganizationTC.addFields({
+  members: {
+    type: [OrganizationAllMembers],
+    resolve: async ({ members }) => {
+      const userIds = members.map(member => member.user)
+      const users = await UserResource.ResourceModel.find({ _id: { $in: userIds } })
+      return users.map(user => ({ user, role: members.find(member => member.user === user._id).role }))
+    },
+  },
+})
 
 OrganizationTC.addResolver({
   kind: 'query',

@@ -27,5 +27,11 @@ query UserConnectWallet($walletAddress: String!) {
     _id
     createdAt
     updatedAt
+    organizations {
+      name
+      website
+      pictureUrl
+      _id
+    }
   }
 }
