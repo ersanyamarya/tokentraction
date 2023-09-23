@@ -31,6 +31,7 @@ query UserConnectWallet($walletAddress: String!) {
       name
       website
       pictureUrl
+      description
       _id
     }
   }

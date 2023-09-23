@@ -572,7 +572,7 @@ export type UserConnectWalletQueryVariables = Exact<{
 }>;
 
 
-export type UserConnectWalletQuery = { __typename?: 'Query', userConnectWallet?: { __typename?: 'User', walletAddress: string, displayName: string, pictureUrl?: string | null, age?: number | null, country?: string | null, state?: string | null, city?: string | null, gender?: EnumUserGender | null, languages?: Array<EnumUserLanguages | null> | null, maritalStatus?: EnumUserMaritalStatus | null, householdSize?: number | null, householdIncome?: EnumUserHouseholdIncome | null, employmentStatus?: EnumUserEmploymentStatus | null, employmentIndustry?: EnumUserEmploymentIndustry | null, religion?: string | null, politicalAffiliation?: EnumUserPoliticalAffiliation | null, accessibilityNeeds?: EnumUserAccessibilityNeeds | null, healthStatus?: EnumUserHealthStatus | null, veteranStatus?: EnumUserVeteranStatus | null, skills?: Array<EnumUserSkills | null> | null, techSkills?: Array<EnumUserTechSkills | null> | null, education?: Array<EnumUserEducation | null> | null, workExperience?: Array<EnumUserWorkExperience | null> | null, interests?: Array<EnumUserInterests | null> | null, _id: any, createdAt?: any | null, updatedAt?: any | null, organizations: Array<{ __typename?: 'Organization', name: string, website?: string | null, pictureUrl?: string | null, _id: any }> } | null };
+export type UserConnectWalletQuery = { __typename?: 'Query', userConnectWallet?: { __typename?: 'User', walletAddress: string, displayName: string, pictureUrl?: string | null, age?: number | null, country?: string | null, state?: string | null, city?: string | null, gender?: EnumUserGender | null, languages?: Array<EnumUserLanguages | null> | null, maritalStatus?: EnumUserMaritalStatus | null, householdSize?: number | null, householdIncome?: EnumUserHouseholdIncome | null, employmentStatus?: EnumUserEmploymentStatus | null, employmentIndustry?: EnumUserEmploymentIndustry | null, religion?: string | null, politicalAffiliation?: EnumUserPoliticalAffiliation | null, accessibilityNeeds?: EnumUserAccessibilityNeeds | null, healthStatus?: EnumUserHealthStatus | null, veteranStatus?: EnumUserVeteranStatus | null, skills?: Array<EnumUserSkills | null> | null, techSkills?: Array<EnumUserTechSkills | null> | null, education?: Array<EnumUserEducation | null> | null, workExperience?: Array<EnumUserWorkExperience | null> | null, interests?: Array<EnumUserInterests | null> | null, _id: any, createdAt?: any | null, updatedAt?: any | null, organizations: Array<{ __typename?: 'Organization', name: string, website?: string | null, pictureUrl?: string | null, description?: string | null, _id: any }> } | null };
 
 
 export const OrganizationCreateDocument = gql`
@@ -716,6 +716,7 @@ export const UserConnectWalletDocument = gql`
       name
       website
       pictureUrl
+      description
       _id
     }
   }
