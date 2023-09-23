@@ -22,7 +22,7 @@ const drawerWidth = 320
 const pathRegexp = (route: string): RegExp => new RegExp(`${route}.*`)
 
 export function NavBarLayout() {
-  const { displayName, pictureUrl, walletAddress, createUser, error, loading, setLoading } = useAuth()
+  const { user, getUser, walletAddress, createUser, error, loading, setLoading } = useAuth()
   const [formName, setFormName] = useState('')
   const [formPictureUrl, setFormPictureUrl] = useState('')
 
@@ -31,6 +31,10 @@ export function NavBarLayout() {
   const [openNewUserDialog, setOpenNewUserDialog] = useState(false)
 
   useEffect(() => {
+    if (walletAddress) {
+      setLoading(true)
+      getUser()
+    }
     if (error && error?.graphQLErrors[0]?.extensions?.code === 'NOT_FOUND') {
       setOpenNewUserDialog(true)
     }
@@ -69,9 +73,9 @@ export function NavBarLayout() {
           <AppBar elevation={1}>
             <Toolbar>
               <Box component="img" src="/text_logo.svg" alt="Token Traction Logo" height="100%" />
-              <Tooltip title={displayName}>
-                <IconButton onClick={() => navigate('/profile')}>
-                  <Avatar sx={{ marginLeft: 'auto' }} src={pictureUrl} />
+              <Tooltip title={user.displayName}>
+                <IconButton onClick={() => navigate('/app/persona')}>
+                  <Avatar sx={{ marginLeft: 'auto' }} src={user.pictureUrl || ''} />
                 </IconButton>
               </Tooltip>
             </Toolbar>

@@ -1,7 +1,33 @@
 query UserConnectWallet($walletAddress: String!) {
   userConnectWallet(walletAddress: $walletAddress) {
-    pictureUrl
+    walletAddress
     displayName
+    pictureUrl
+    age
+    location {
+      country
+      state
+      city
+    }
+    gender
+    languages
+    maritalStatus
+    householdSize
+    householdIncome
+    employmentStatus
+    employmentIndustry
+    religion
+    politicalAffiliation
+    accessibilityNeeds
+    healthStatus
+    veteranStatus
+    skills
+    techSkills
+    education
+    workExperience
+    interests
     _id
+    createdAt
+    updatedAt
   }
 }

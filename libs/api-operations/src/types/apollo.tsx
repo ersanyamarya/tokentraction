@@ -544,7 +544,7 @@ export type UserConnectWalletQueryVariables = Exact<{
 }>;
 
 
-export type UserConnectWalletQuery = { __typename?: 'Query', userConnectWallet?: { __typename?: 'User', pictureUrl?: string | null, displayName: string, _id: any } | null };
+export type UserConnectWalletQuery = { __typename?: 'Query', userConnectWallet?: { __typename?: 'User', walletAddress: string, displayName: string, pictureUrl?: string | null, age?: number | null, gender?: EnumUserGender | null, languages?: Array<string | null> | null, maritalStatus?: EnumUserMaritalStatus | null, householdSize?: number | null, householdIncome?: EnumUserHouseholdIncome | null, employmentStatus?: EnumUserEmploymentStatus | null, employmentIndustry?: EnumUserEmploymentIndustry | null, religion?: string | null, politicalAffiliation?: EnumUserPoliticalAffiliation | null, accessibilityNeeds?: EnumUserAccessibilityNeeds | null, healthStatus?: EnumUserHealthStatus | null, veteranStatus?: EnumUserVeteranStatus | null, skills?: Array<EnumUserSkills | null> | null, techSkills?: Array<EnumUserTechSkills | null> | null, education?: Array<EnumUserEducation | null> | null, workExperience?: Array<EnumUserWorkExperience | null> | null, interests?: Array<EnumUserInterests | null> | null, _id: any, createdAt?: any | null, updatedAt?: any | null, location?: { __typename?: 'UserLocation', country?: string | null, state?: string | null, city?: string | null } | null } | null };
 
 
 export const UserCreateDocument = gql`
@@ -623,9 +623,35 @@ export type UserUpdateMutationOptions = Apollo.BaseMutationOptions<UserUpdateMut
 export const UserConnectWalletDocument = gql`
     query UserConnectWallet($walletAddress: String!) {
   userConnectWallet(walletAddress: $walletAddress) {
-    pictureUrl
+    walletAddress
     displayName
+    pictureUrl
+    age
+    location {
+      country
+      state
+      city
+    }
+    gender
+    languages
+    maritalStatus
+    householdSize
+    householdIncome
+    employmentStatus
+    employmentIndustry
+    religion
+    politicalAffiliation
+    accessibilityNeeds
+    healthStatus
+    veteranStatus
+    skills
+    techSkills
+    education
+    workExperience
+    interests
     _id
+    createdAt
+    updatedAt
   }
 }
     `;

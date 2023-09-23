@@ -1,9 +1,9 @@
 import { CircularProgress } from '@mui/material'
+import { useMetaMask } from 'metamask-react'
 import { Suspense } from 'react'
 import { Navigate, Route, BrowserRouter as Router, Routes } from 'react-router-dom'
-import { Dashboard, NotFound, LandingPage } from './pages'
+import { Dashboard, LandingPage, PersonaPage } from './pages'
 import { NavBarLayout } from './templates'
-import { useMetaMask } from 'metamask-react'
 function LazyLoaded({ children }: { children: React.ReactNode }) {
   return <Suspense fallback={<CircularProgress size={256} thickness={2} />}>{children}</Suspense>
 }
@@ -26,8 +26,8 @@ export default function Routing() {
             </AuthRoute>
           }
         >
-          {/* <Route path="/" element={<LandingPage />} /> */}
           <Route path="/app" element={<Dashboard />} />
+          <Route path="/app/persona" element={<PersonaPage />} />
         </Route>
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

@@ -1,4 +1,5 @@
 import {
+  User,
   useUserConnectWalletLazyQuery,
   useUserConnectWalletQuery,
   useUserCreateMutation,
@@ -9,33 +10,46 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
 export interface IStateDBUser {
-  id: string
-  displayName: string
-  walletAddress: string
-  pictureUrl: string
+  user: User
   setUser: (user: User) => void
   clear: () => void
 }
 
-export interface User {
-  id: string
-  displayName: string
-  walletAddress: string
-  pictureUrl: string
-}
 const defaultUser: User = {
-  id: '',
-  displayName: '',
   walletAddress: '',
+  displayName: '',
   pictureUrl: '',
+  age: null,
+  location: null,
+  gender: null,
+  languages: [],
+  maritalStatus: null,
+  householdSize: null,
+  householdIncome: null,
+  employmentStatus: null,
+  employmentIndustry: null,
+  religion: null,
+  politicalAffiliation: null,
+  accessibilityNeeds: null,
+  healthStatus: null,
+  veteranStatus: null,
+  skills: [],
+  techSkills: [],
+  education: [],
+  workExperience: [],
+  interests: [],
+  _id: '650ea62f43477d7e33a77cbd',
+  createdAt: null,
+  updatedAt: null,
+  __typename: 'User',
 }
 
 export const useAuthStore = create(
   persist<IStateDBUser>(
     (set, get) => ({
-      ...defaultUser,
-      setUser: (user: User) => set(user),
-      clear: () => set(defaultUser),
+      user: defaultUser,
+      setUser: (user: User) => set({ user }),
+      clear: () => set({ user: defaultUser }),
     }),
     {
       name: 'auth-storage',
@@ -45,21 +59,16 @@ export const useAuthStore = create(
 )
 
 export const useAuth = () => {
-  const { setUser, clear, ...user } = useAuthStore()
+  const { setUser, clear, user } = useAuthStore()
   const { account, status } = useMetaMask()
   const [loading, setLoading] = useState(false)
-  const { error } = useUserConnectWalletQuery({
+  const [getUser, { error }] = useUserConnectWalletLazyQuery({
     variables: {
       walletAddress: account || '',
     },
     onCompleted: data => {
       if (data?.userConnectWallet) {
-        setUser({
-          id: data.userConnectWallet._id,
-          displayName: data.userConnectWallet.displayName,
-          walletAddress: account || '',
-          pictureUrl: data.userConnectWallet.pictureUrl || '',
-        })
+        setUser(data.userConnectWallet)
       }
       setLoading(false)
     },
@@ -77,7 +86,8 @@ export const useAuth = () => {
   // if (account && !user.id) getUser()
 
   return {
-    ...user,
+    user,
+    getUser,
     loading,
     error,
     clear,
