@@ -31,7 +31,7 @@ export function NavBarLayout() {
   const [openNewUserDialog, setOpenNewUserDialog] = useState(false)
 
   useEffect(() => {
-    if (walletAddress) {
+    if (walletAddress && !user._id && !loading && !error) {
       setLoading(true)
       getUser()
     }

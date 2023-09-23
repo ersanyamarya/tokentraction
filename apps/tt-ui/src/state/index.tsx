@@ -1,13 +1,14 @@
+import { ApolloError } from '@apollo/client'
 import {
   User,
   useUserConnectWalletLazyQuery,
-  useUserConnectWalletQuery,
   useUserCreateMutation,
+  useUserUpdateMutation,
 } from '@tokentraction/api-operations'
 import { useMetaMask } from 'metamask-react'
 import { useState } from 'react'
 import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
+import { createJSONStorage, persist } from 'zustand/middleware'
 
 export interface IStateDBUser {
   user: User
@@ -20,7 +21,9 @@ const defaultUser: User = {
   displayName: '',
   pictureUrl: '',
   age: null,
-  location: null,
+  country: null,
+  state: null,
+  city: null,
   gender: null,
   languages: [],
   maritalStatus: null,
@@ -38,7 +41,7 @@ const defaultUser: User = {
   education: [],
   workExperience: [],
   interests: [],
-  _id: '650ea62f43477d7e33a77cbd',
+  _id: '',
   createdAt: null,
   updatedAt: null,
   __typename: 'User',
@@ -53,7 +56,7 @@ export const useAuthStore = create(
     }),
     {
       name: 'auth-storage',
-      getStorage: () => window.localStorage,
+      storage: createJSONStorage(() => localStorage),
     }
   )
 )
@@ -62,21 +65,46 @@ export const useAuth = () => {
   const { setUser, clear, user } = useAuthStore()
   const { account, status } = useMetaMask()
   const [loading, setLoading] = useState(false)
-  const [getUser, { error }] = useUserConnectWalletLazyQuery({
+  const [error, setError] = useState<ApolloError>()
+  const [getUser] = useUserConnectWalletLazyQuery({
     variables: {
       walletAddress: account || '',
     },
     onCompleted: data => {
       if (data?.userConnectWallet) {
+        console.log('data.userConnectWallet', data.userConnectWallet)
+
         setUser(data.userConnectWallet)
       }
+
       setLoading(false)
     },
+    onError: error => {
+      setError(error)
+      setLoading(false)
+    },
+    fetchPolicy: 'network-only',
+    notifyOnNetworkStatusChange: true,
   })
 
   const [createUser] = useUserCreateMutation({
     refetchQueries: ['UserConnectWallet'],
-    onCompleted: data => {
+    onCompleted: async data => {
+      await getUser()
+    },
+    onError: error => {
+      setError(error)
+      setLoading(false)
+    },
+  })
+
+  const [updatePersona] = useUserUpdateMutation({
+    refetchQueries: ['UserConnectWallet'],
+    onCompleted: async data => {
+      await getUser()
+    },
+    onError: error => {
+      setError(error)
       setLoading(false)
     },
   })
@@ -94,5 +122,6 @@ export const useAuth = () => {
     walletAddress: account || '',
     createUser,
     setLoading,
+    updatePersona,
   }
 }

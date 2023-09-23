@@ -1,8 +1,11 @@
-import { IconButton, Stack, Typography } from '@mui/material'
-import usePersonaState from './persona-state'
 import styled from '@emotion/styled'
+import { Alert, Divider, IconButton, Stack, Typography } from '@mui/material'
 import { Edit3 } from 'lucide-react'
 import { FirstRow } from './FirstRow'
+import usePersonaState from './persona-state'
+import { PersonaForm } from './PersonaForm'
+import { TTLoader } from '@tokentraction/tt-design'
+import { useEffect, useState } from 'react'
 
 const Container = styled(Stack)`
   padding: 2rem;
@@ -23,9 +26,21 @@ const Container = styled(Stack)`
 `
 
 export function PersonaPage() {
-  const { persona, editMode, setEditMode } = usePersonaState()
+  const { persona, editMode, setEditMode, savePersona, loading, error } = usePersonaState()
+  const [showAlert, setShowAlert] = useState(false)
+
+  useEffect(() => {
+    if (error) {
+      setShowAlert(true)
+      setTimeout(() => {
+        setShowAlert(false)
+      }, 10000)
+    }
+  }, [error, setEditMode])
+  if (error && showAlert) return <Alert severity="error">{error.message}</Alert>
+  if (loading) return <TTLoader />
   return (
-    <Container>
+    <Container gap={1}>
       <Typography
         component="h1"
         className="heading"
@@ -44,11 +59,12 @@ export function PersonaPage() {
           <Edit3 size={32} color="#00174b" />
         </IconButton>
       </Typography>
+
       <Typography component="h2" className="subheading">
-        Manage your profile, wallet and personas
+        {editMode ? 'Edit your Profile' : '  Manage your profile, wallet and personas'}
       </Typography>
-      {!editMode && <FirstRow {...persona} />}
-      <pre>{JSON.stringify({ editMode, persona }, null, 2)}</pre>
+      <Divider />
+      {!editMode ? <FirstRow {...persona} /> : <PersonaForm persona={persona} savePersona={savePersona} />}
     </Container>
   )
 }

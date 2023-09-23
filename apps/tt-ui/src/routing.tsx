@@ -4,12 +4,17 @@ import { Suspense } from 'react'
 import { Navigate, Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import { Dashboard, LandingPage, PersonaPage } from './pages'
 import { NavBarLayout } from './templates'
+import { useAuth } from './state'
 function LazyLoaded({ children }: { children: React.ReactNode }) {
   return <Suspense fallback={<CircularProgress size={256} thickness={2} />}>{children}</Suspense>
 }
 function AuthRoute({ children }: { children: React.ReactNode }) {
+  const { clear } = useAuth()
   const { status } = useMetaMask()
-  if (status !== 'connected') return <Navigate to="/" />
+  if (status !== 'connected') {
+    clear()
+    return <Navigate to="/" />
+  }
   return <LazyLoaded>{children}</LazyLoaded>
 }
 export default function Routing() {

@@ -4,11 +4,9 @@ query UserConnectWallet($walletAddress: String!) {
     displayName
     pictureUrl
     age
-    location {
-      country
-      state
-      city
-    }
+    country
+    state
+    city
     gender
     languages
     maritalStatus

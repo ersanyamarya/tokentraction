@@ -21,14 +21,16 @@ export type Scalars = {
 };
 
 export type CreateOneOrganizationInput = {
+  city?: InputMaybe<Scalars['String']['input']>;
+  country?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['Date']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   industry: Array<InputMaybe<EnumOrganizationIndustry>>;
-  location?: InputMaybe<UserLocationInput>;
   members?: InputMaybe<Array<InputMaybe<OrganizationMembersInput>>>;
   name: Scalars['String']['input'];
   pictureUrl?: InputMaybe<Scalars['String']['input']>;
   size: EnumOrganizationSize;
+  state?: InputMaybe<Scalars['String']['input']>;
   techStack?: InputMaybe<Array<InputMaybe<EnumOrganizationTechStack>>>;
   typeOfOrganization: Array<InputMaybe<EnumOrganizationTypeOfOrganization>>;
   updatedAt?: InputMaybe<Scalars['Date']['input']>;
@@ -241,6 +243,22 @@ export enum EnumUserInterests {
   Writing = 'Writing'
 }
 
+export enum EnumUserLanguages {
+  Arabic = 'Arabic',
+  Bengali = 'Bengali',
+  English = 'English',
+  French = 'French',
+  German = 'German',
+  Hindi = 'Hindi',
+  Japanese = 'Japanese',
+  Mandarin = 'Mandarin',
+  Other = 'Other',
+  Portuguese = 'Portuguese',
+  Punjabi = 'Punjabi',
+  Russian = 'Russian',
+  Spanish = 'Spanish'
+}
+
 export enum EnumUserMaritalStatus {
   Divorced = 'Divorced',
   DomesticPartnership = 'Domestic_Partnership',
@@ -380,14 +398,16 @@ export type MutationUserUpdateArgs = {
 export type Organization = {
   __typename?: 'Organization';
   _id: Scalars['MongoID']['output'];
+  city?: Maybe<Scalars['String']['output']>;
+  country?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['Date']['output']>;
   description?: Maybe<Scalars['String']['output']>;
   industry: Array<Maybe<EnumOrganizationIndustry>>;
-  location?: Maybe<UserLocation>;
   members?: Maybe<Array<Maybe<OrganizationMembers>>>;
   name: Scalars['String']['output'];
   pictureUrl?: Maybe<Scalars['String']['output']>;
   size: EnumOrganizationSize;
+  state?: Maybe<Scalars['String']['output']>;
   techStack?: Maybe<Array<Maybe<EnumOrganizationTechStack>>>;
   typeOfOrganization: Array<Maybe<EnumOrganizationTypeOfOrganization>>;
   updatedAt?: Maybe<Scalars['Date']['output']>;
@@ -430,6 +450,8 @@ export type RuntimeError = ErrorInterface & {
 export type UpdateOneUserInput = {
   accessibilityNeeds?: InputMaybe<EnumUserAccessibilityNeeds>;
   age?: InputMaybe<Scalars['Float']['input']>;
+  city?: InputMaybe<Scalars['String']['input']>;
+  country?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['Date']['input']>;
   displayName?: InputMaybe<Scalars['String']['input']>;
   education?: InputMaybe<Array<InputMaybe<EnumUserEducation>>>;
@@ -440,13 +462,13 @@ export type UpdateOneUserInput = {
   householdIncome?: InputMaybe<EnumUserHouseholdIncome>;
   householdSize?: InputMaybe<Scalars['Float']['input']>;
   interests?: InputMaybe<Array<InputMaybe<EnumUserInterests>>>;
-  languages?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  location?: InputMaybe<UpdateOneUserLocationInput>;
+  languages?: InputMaybe<Array<InputMaybe<EnumUserLanguages>>>;
   maritalStatus?: InputMaybe<EnumUserMaritalStatus>;
   pictureUrl?: InputMaybe<Scalars['String']['input']>;
   politicalAffiliation?: InputMaybe<EnumUserPoliticalAffiliation>;
   religion?: InputMaybe<Scalars['String']['input']>;
   skills?: InputMaybe<Array<InputMaybe<EnumUserSkills>>>;
+  state?: InputMaybe<Scalars['String']['input']>;
   techSkills?: InputMaybe<Array<InputMaybe<EnumUserTechSkills>>>;
   updatedAt?: InputMaybe<Scalars['Date']['input']>;
   veteranStatus?: InputMaybe<EnumUserVeteranStatus>;
@@ -454,17 +476,13 @@ export type UpdateOneUserInput = {
   workExperience?: InputMaybe<Array<InputMaybe<EnumUserWorkExperience>>>;
 };
 
-export type UpdateOneUserLocationInput = {
-  city?: InputMaybe<Scalars['String']['input']>;
-  country?: InputMaybe<Scalars['String']['input']>;
-  state?: InputMaybe<Scalars['String']['input']>;
-};
-
 export type User = {
   __typename?: 'User';
   _id: Scalars['MongoID']['output'];
   accessibilityNeeds?: Maybe<EnumUserAccessibilityNeeds>;
   age?: Maybe<Scalars['Float']['output']>;
+  city?: Maybe<Scalars['String']['output']>;
+  country?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['Date']['output']>;
   displayName: Scalars['String']['output'];
   education?: Maybe<Array<Maybe<EnumUserEducation>>>;
@@ -475,31 +493,18 @@ export type User = {
   householdIncome?: Maybe<EnumUserHouseholdIncome>;
   householdSize?: Maybe<Scalars['Float']['output']>;
   interests?: Maybe<Array<Maybe<EnumUserInterests>>>;
-  languages?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  location?: Maybe<UserLocation>;
+  languages?: Maybe<Array<Maybe<EnumUserLanguages>>>;
   maritalStatus?: Maybe<EnumUserMaritalStatus>;
   pictureUrl?: Maybe<Scalars['String']['output']>;
   politicalAffiliation?: Maybe<EnumUserPoliticalAffiliation>;
   religion?: Maybe<Scalars['String']['output']>;
   skills?: Maybe<Array<Maybe<EnumUserSkills>>>;
+  state?: Maybe<Scalars['String']['output']>;
   techSkills?: Maybe<Array<Maybe<EnumUserTechSkills>>>;
   updatedAt?: Maybe<Scalars['Date']['output']>;
   veteranStatus?: Maybe<EnumUserVeteranStatus>;
   walletAddress: Scalars['String']['output'];
   workExperience?: Maybe<Array<Maybe<EnumUserWorkExperience>>>;
-};
-
-export type UserLocation = {
-  __typename?: 'UserLocation';
-  city?: Maybe<Scalars['String']['output']>;
-  country?: Maybe<Scalars['String']['output']>;
-  state?: Maybe<Scalars['String']['output']>;
-};
-
-export type UserLocationInput = {
-  city?: InputMaybe<Scalars['String']['input']>;
-  country?: InputMaybe<Scalars['String']['input']>;
-  state?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ValidationError = ErrorInterface & {
@@ -544,7 +549,7 @@ export type UserConnectWalletQueryVariables = Exact<{
 }>;
 
 
-export type UserConnectWalletQuery = { __typename?: 'Query', userConnectWallet?: { __typename?: 'User', walletAddress: string, displayName: string, pictureUrl?: string | null, age?: number | null, gender?: EnumUserGender | null, languages?: Array<string | null> | null, maritalStatus?: EnumUserMaritalStatus | null, householdSize?: number | null, householdIncome?: EnumUserHouseholdIncome | null, employmentStatus?: EnumUserEmploymentStatus | null, employmentIndustry?: EnumUserEmploymentIndustry | null, religion?: string | null, politicalAffiliation?: EnumUserPoliticalAffiliation | null, accessibilityNeeds?: EnumUserAccessibilityNeeds | null, healthStatus?: EnumUserHealthStatus | null, veteranStatus?: EnumUserVeteranStatus | null, skills?: Array<EnumUserSkills | null> | null, techSkills?: Array<EnumUserTechSkills | null> | null, education?: Array<EnumUserEducation | null> | null, workExperience?: Array<EnumUserWorkExperience | null> | null, interests?: Array<EnumUserInterests | null> | null, _id: any, createdAt?: any | null, updatedAt?: any | null, location?: { __typename?: 'UserLocation', country?: string | null, state?: string | null, city?: string | null } | null } | null };
+export type UserConnectWalletQuery = { __typename?: 'Query', userConnectWallet?: { __typename?: 'User', walletAddress: string, displayName: string, pictureUrl?: string | null, age?: number | null, country?: string | null, state?: string | null, city?: string | null, gender?: EnumUserGender | null, languages?: Array<EnumUserLanguages | null> | null, maritalStatus?: EnumUserMaritalStatus | null, householdSize?: number | null, householdIncome?: EnumUserHouseholdIncome | null, employmentStatus?: EnumUserEmploymentStatus | null, employmentIndustry?: EnumUserEmploymentIndustry | null, religion?: string | null, politicalAffiliation?: EnumUserPoliticalAffiliation | null, accessibilityNeeds?: EnumUserAccessibilityNeeds | null, healthStatus?: EnumUserHealthStatus | null, veteranStatus?: EnumUserVeteranStatus | null, skills?: Array<EnumUserSkills | null> | null, techSkills?: Array<EnumUserTechSkills | null> | null, education?: Array<EnumUserEducation | null> | null, workExperience?: Array<EnumUserWorkExperience | null> | null, interests?: Array<EnumUserInterests | null> | null, _id: any, createdAt?: any | null, updatedAt?: any | null } | null };
 
 
 export const UserCreateDocument = gql`
@@ -627,11 +632,9 @@ export const UserConnectWalletDocument = gql`
     displayName
     pictureUrl
     age
-    location {
-      country
-      state
-      city
-    }
+    country
+    state
+    city
     gender
     languages
     maritalStatus

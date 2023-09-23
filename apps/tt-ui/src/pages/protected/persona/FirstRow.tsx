@@ -30,7 +30,7 @@ export function FirstRow(persona: User) {
         <Stack direction="column" justifyContent="flex-start" gap="0.5rem">
           <Typography variant="h4">{persona.displayName}</Typography>
           <Typography variant="h5">
-            {persona.location?.city}, {persona.location?.state}, {persona.location?.country}
+            {persona.city}, {persona.state}, {persona.country}
           </Typography>
           <Typography variant="h5">
             {persona.gender}, {persona.maritalStatus}
@@ -47,7 +47,7 @@ export function FirstRow(persona: User) {
           flex: 1,
         }}
       >
-        <Typography variant="h5">Wallet Address: {persona.walletAddress}</Typography>
+        <Typography variant="h5">Leader board coming soon ....</Typography>
       </Stack>
     </Stack>
   )
