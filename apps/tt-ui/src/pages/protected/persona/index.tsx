@@ -7,6 +7,7 @@ import { PersonaForm } from './PersonaForm'
 import { TTLoader } from '@tokentraction/tt-design'
 import { useEffect, useState } from 'react'
 import { OrganizationsTab } from './organizations'
+import { PersonaTab } from './personas'
 
 const Container = styled(Stack)`
   padding: 2rem;
@@ -81,10 +82,10 @@ export function PersonaPage() {
               </Tabs>
             </Box>
             <CustomTabPanel value={value} index={0}>
-              <OrganizationsTab persona={persona} />
+              <PersonaTab persona={persona} />
             </CustomTabPanel>
             <CustomTabPanel value={value} index={1}>
-              {/* <OrganizationsTab persona={persona} /> */}
+              <OrganizationsTab persona={persona} />
             </CustomTabPanel>
           </Box>
         </>
