@@ -9,12 +9,13 @@ query ForumtopicList($filter: FilterFindManyTopicInput) {
   }
 }
 
-query ForummessageList($filter: FilterFindManyMessageInput) {
-  forummessageList(filter: $filter) {
+query ForummessageList($filter: FilterFindManyMessageInput, $sort: SortFindManyMessageInput) {
+  forummessageList(filter: $filter, sort: $sort) {
     content
     _id
     userFullName
     userPictureUrl
     userId
+    createdAt
   }
 }
