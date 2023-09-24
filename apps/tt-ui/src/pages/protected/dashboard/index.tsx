@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
-import { Box, Button, Stack, Typography } from '@mui/material'
+import { Box, Button, Stack, Tab, Tabs, Typography } from '@mui/material'
 import { useTaskListQuery } from '@tokentraction/api-operations'
-import { ReactNode } from 'react'
+import { ReactNode, useState } from 'react'
 import { CrowdFunded } from './CrowdFunded'
 import { VoiceYourOpinionSection } from './VoiceYourOpinion'
 import { UsabilityTestingSection } from './UsablityTesting'
@@ -31,22 +31,32 @@ const Container = styled(Box)`
 
 export function Dashboard() {
   const { data } = useTaskListQuery()
+  const [value, setValue] = useState(0)
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue)
+  }
   return (
     <Container>
       {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
       <Typography variant="h1" component="h1" className="h1">
         Engagement Hub
       </Typography>
-      <Typography variant="h2" component="h2" className="h2">
-        Discover and Participate in Tasks Aligned with Your Persona
-      </Typography>
-      <br />
-      <br />
-      <Stack gap={6}>
-        <CrowdFunded crowdfundeddataList={data?.crowdfundeddataList || []} />
-        <VoiceYourOpinionSection voiceYourOpinionList={data?.voiceyouropinionList || []} />
-        <UsabilityTestingSection usabilityTestingList={data?.usabilitytestingList || []} />
-      </Stack>
+      <Box sx={{ width: '100%' }}>
+        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+          <Tabs value={value} onChange={handleChange} variant="fullWidth">
+            <Tab label="Tasks" />
+            <Tab label="Community Forum" />
+          </Tabs>
+        </Box>
+        <CustomTabPanel value={value} index={0}>
+          <Stack gap={6}>
+            <CrowdFunded crowdfundeddataList={data?.crowdfundeddataList || []} />
+            <VoiceYourOpinionSection voiceYourOpinionList={data?.voiceyouropinionList || []} />
+            <UsabilityTestingSection usabilityTestingList={data?.usabilitytestingList || []} />
+          </Stack>
+        </CustomTabPanel>
+        <CustomTabPanel value={value} index={1}></CustomTabPanel>
+      </Box>
     </Container>
   )
 }
@@ -70,5 +80,31 @@ export function Section({ name, viewAllLink, icon, children }: SectionProps) {
       </Stack>
       {children}
     </Stack>
+  )
+}
+
+interface TabPanelProps {
+  children?: React.ReactNode
+  index: number
+  value: number
+}
+
+function CustomTabPanel(props: TabPanelProps) {
+  const { children, value, index, ...other } = props
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
   )
 }
