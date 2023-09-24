@@ -1933,10 +1933,12 @@ export type ForummessageCreateMutationVariables = Exact<{
 
 export type ForummessageCreateMutation = { __typename?: 'Mutation', forummessageCreate?: { __typename?: 'CreateOneMessagePayload', recordId?: any | null } | null };
 
-export type ForumtopicListQueryVariables = Exact<{ [key: string]: never; }>;
+export type ForumtopicListQueryVariables = Exact<{
+  filter?: InputMaybe<FilterFindManyTopicInput>;
+}>;
 
 
-export type ForumtopicListQuery = { __typename?: 'Query', forumtopicList: Array<{ __typename?: 'Topic', title: string, _id: any, organizationName?: string | null, summary?: string | null, bestAnswer?: string | null }> };
+export type ForumtopicListQuery = { __typename?: 'Query', forumtopicList: Array<{ __typename?: 'Topic', title: string, _id: any, organizationName?: string | null, organizationId?: any | null, summary?: string | null, bestAnswer?: string | null }> };
 
 export type ForummessageListQueryVariables = Exact<{
   filter?: InputMaybe<FilterFindManyMessageInput>;
@@ -2067,11 +2069,12 @@ export type ForummessageCreateMutationHookResult = ReturnType<typeof useForummes
 export type ForummessageCreateMutationResult = Apollo.MutationResult<ForummessageCreateMutation>;
 export type ForummessageCreateMutationOptions = Apollo.BaseMutationOptions<ForummessageCreateMutation, ForummessageCreateMutationVariables>;
 export const ForumtopicListDocument = gql`
-    query ForumtopicList {
-  forumtopicList {
+    query ForumtopicList($filter: FilterFindManyTopicInput) {
+  forumtopicList(filter: $filter) {
     title
     _id
     organizationName
+    organizationId
     summary
     bestAnswer
   }
@@ -2090,6 +2093,7 @@ export const ForumtopicListDocument = gql`
  * @example
  * const { data, loading, error } = useForumtopicListQuery({
  *   variables: {
+ *      filter: // value for 'filter'
  *   },
  * });
  */

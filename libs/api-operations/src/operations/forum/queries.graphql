@@ -1,8 +1,9 @@
-query ForumtopicList {
-  forumtopicList {
+query ForumtopicList($filter: FilterFindManyTopicInput) {
+  forumtopicList(filter: $filter) {
     title
     _id
     organizationName
+    organizationId
     summary
     bestAnswer
   }

@@ -7,7 +7,7 @@ interface FormProps {
 }
 
 export function FormSubmissions({ submissions }: FormProps) {
-  const { state, registerField, valueExists } = useForm({})
+  const { registerField } = useForm({})
   return (
     <Stack
       gap={2}
