@@ -1,13 +1,13 @@
 import { Box, Card, Typography, Stack, Dialog } from '@mui/material'
-import { CrowdFundedData } from '@tokentraction/api-operations'
+import { UsabilityTesting } from '@tokentraction/api-operations'
 import { Section } from '..'
 import styled from '@emotion/styled'
 import { Heart } from 'lucide-react'
-import { useState } from 'react'
 import { FormSubmissions } from '../Form'
+import { useState } from 'react'
 
 interface CrowdFundedProps {
-  crowdfundeddataList: Array<CrowdFundedData>
+  usabilityTestingList: Array<UsabilityTesting>
 }
 
 const CrowdFundedCard = styled(Card)`
@@ -60,8 +60,9 @@ const CrowdFundedCard = styled(Card)`
     letter-spacing: 0.03125rem;
   }
   .description {
-    color: var(--m-3-sys-light-on-primary-container, #00174b);
-    /* M3/title/medium */
+    padding: 1rem;
+    color: var(--m-3-sys-light-on-primary, #fff);
+    background: linear-gradient(180deg, #2c57c2 -43.66%, #000 100%);
     font-family: Josefin Sans;
     font-size: 1rem;
     font-style: normal;
@@ -70,25 +71,25 @@ const CrowdFundedCard = styled(Card)`
     letter-spacing: 0.00938rem;
   }
 `
-export function CrowdFunded({ crowdfundeddataList }: CrowdFundedProps) {
+export function UsabilityTestingSection({ usabilityTestingList }: CrowdFundedProps) {
   const [openForm, setOpenForm] = useState(false)
   return (
     <Section
-      name="Crowd Funded Data"
+      name="Usability Testing"
       viewAllLink="/dashboard"
       icon={
         <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
-            d="M22 4.125C12.7531 4.125 5.5 8.35313 5.5 13.75V30.25C5.5 35.6469 12.7531 39.875 22 39.875C31.2469 39.875 38.5 35.6469 38.5 30.25V13.75C38.5 8.35313 31.2469 4.125 22 4.125ZM35.75 22C35.75 23.65 34.3922 25.3344 32.0375 26.6234C29.3734 28.0844 25.8156 28.875 22 28.875C18.1844 28.875 14.6266 28.0844 11.9625 26.6234C9.60781 25.3344 8.25 23.65 8.25 22V19.1469C11.1891 21.7078 16.1906 23.375 22 23.375C27.8094 23.375 32.8109 21.7078 35.75 19.1469V22ZM32.0375 34.8734C29.3734 36.3344 25.8156 37.125 22 37.125C18.1844 37.125 14.6266 36.3344 11.9625 34.8734C9.60781 33.5844 8.25 31.9 8.25 30.25V27.3969C11.1891 29.9578 16.1906 31.625 22 31.625C27.8094 31.625 32.8109 29.9578 35.75 27.3969V30.25C35.75 31.9 34.3922 33.5844 32.0375 34.8734Z"
-            fill="url(#paint0_linear_87_57931)"
+            d="M40.8547 14.8328L30.5422 4.52031C30.2815 4.26211 29.9294 4.11726 29.5625 4.11726C29.1956 4.11726 28.8435 4.26211 28.5828 4.52031L10.725 22.3953L6.23906 26.8641C4.79404 28.3091 3.98224 30.2689 3.98224 32.3125C3.98224 34.3561 4.79404 36.3159 6.23906 37.7609C7.68407 39.206 9.64393 40.0178 11.6875 40.0178C13.7311 40.0178 15.6909 39.206 17.1359 37.7609L30.525 24.3547L36.4891 18.3906L40.3047 17.1187C40.5278 17.0421 40.7282 16.9107 40.8873 16.7365C41.0465 16.5623 41.1594 16.351 41.2156 16.1219C41.2655 15.8939 41.2587 15.6571 41.1957 15.4324C41.1328 15.2076 41.0157 15.0018 40.8547 14.8328ZM35.3203 15.8813C35.117 15.9524 34.93 16.0634 34.7703 16.2078L28.6516 22.3266C28.2906 22.6016 25.575 24.3203 21.2437 22.1375C19.3531 21.1922 17.6687 20.8313 16.225 20.7797L29.5625 7.44219L37.3312 15.2109L35.3203 15.8813Z"
+            fill="url(#paint0_linear_87_57855)"
           />
           <defs>
             <linearGradient
-              id="paint0_linear_87_57931"
-              x1="22"
-              y1="4.125"
-              x2="22"
-              y2="39.875"
+              id="paint0_linear_87_57855"
+              x1="22.6154"
+              y1="4.11726"
+              x2="22.6154"
+              y2="40.0178"
               gradientUnits="userSpaceOnUse"
             >
               <stop stopColor="#03FBBF" stopOpacity="0.57" />
@@ -99,7 +100,7 @@ export function CrowdFunded({ crowdfundeddataList }: CrowdFundedProps) {
       }
     >
       <Stack direction="row" alignItems="center" justifyContent="unset" width={'100%'} gap={2}>
-        {crowdfundeddataList.map(crowdfundeddata => {
+        {usabilityTestingList.map(crowdfundeddata => {
           return (
             <>
               <Dialog open={openForm} onClose={() => setOpenForm(false)}>
@@ -109,9 +110,7 @@ export function CrowdFunded({ crowdfundeddataList }: CrowdFundedProps) {
                 <Typography variant="h2" component="h2" className="organizationName">
                   {crowdfundeddata.organizationName}
                 </Typography>
-                <Typography variant="h3" component="h3" className="name">
-                  {crowdfundeddata.name}
-                </Typography>
+
                 <Box className="picture" component="img" src={crowdfundeddata.pictureUrl || ''} />
                 <Typography variant="h4" component="h4" className="rewards">
                   Rewards

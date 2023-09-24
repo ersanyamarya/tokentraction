@@ -3,6 +3,8 @@ import { Box, Button, Stack, Typography } from '@mui/material'
 import { useTaskListQuery } from '@tokentraction/api-operations'
 import { ReactNode } from 'react'
 import { CrowdFunded } from './CrowdFunded'
+import { VoiceYourOpinionSection } from './VoiceYourOpinion'
+import { UsabilityTestingSection } from './UsablityTesting'
 
 const Container = styled(Box)`
   display: flex;
@@ -31,6 +33,7 @@ export function Dashboard() {
   const { data } = useTaskListQuery()
   return (
     <Container>
+      {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
       <Typography variant="h1" component="h1" className="h1">
         Engagement Hub
       </Typography>
@@ -39,7 +42,11 @@ export function Dashboard() {
       </Typography>
       <br />
       <br />
-      <CrowdFunded crowdfundeddataList={data?.crowdfundeddataList || []} />
+      <Stack gap={6}>
+        <CrowdFunded crowdfundeddataList={data?.crowdfundeddataList || []} />
+        <VoiceYourOpinionSection voiceYourOpinionList={data?.voiceyouropinionList || []} />
+        <UsabilityTestingSection usabilityTestingList={data?.usabilitytestingList || []} />
+      </Stack>
     </Container>
   )
 }

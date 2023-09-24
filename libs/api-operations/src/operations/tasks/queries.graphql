@@ -19,6 +19,7 @@ query TaskList {
   voiceyouropinionList {
     orgId
     name
+    organizationName
     surveyTopics
     amount
     pictureUrl
@@ -35,6 +36,7 @@ query TaskList {
   usabilitytestingList {
     orgId
     name
+    organizationName
     description
     amount
     pictureUrl

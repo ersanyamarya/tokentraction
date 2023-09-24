@@ -1377,6 +1377,7 @@ export type UsabilityTesting = {
   description?: Maybe<Scalars['String']['output']>
   name?: Maybe<Scalars['String']['output']>
   orgId?: Maybe<Scalars['MongoID']['output']>
+  organizationName?: Maybe<Scalars['String']['output']>
   pictureUrl?: Maybe<Scalars['String']['output']>
   submissions?: Maybe<Array<Maybe<CrowdFundedDataSubmissions>>>
 }
@@ -1456,6 +1457,7 @@ export type VoiceYourOpinion = {
   amount?: Maybe<Scalars['Float']['output']>
   name?: Maybe<Scalars['String']['output']>
   orgId?: Maybe<Scalars['MongoID']['output']>
+  organizationName?: Maybe<Scalars['String']['output']>
   pictureUrl?: Maybe<Scalars['String']['output']>
   submissions?: Maybe<Array<Maybe<CrowdFundedDataSubmissions>>>
   surveyTopics?: Maybe<Array<Maybe<Scalars['String']['output']>>>
@@ -1509,6 +1511,7 @@ export type TaskListQuery = {
     __typename?: 'VoiceYourOpinion'
     orgId?: any | null
     name?: string | null
+    organizationName?: string | null
     surveyTopics?: Array<string | null> | null
     amount?: number | null
     pictureUrl?: string | null
@@ -1527,6 +1530,7 @@ export type TaskListQuery = {
     __typename?: 'UsabilityTesting'
     orgId?: any | null
     name?: string | null
+    organizationName?: string | null
     description?: string | null
     amount?: number | null
     pictureUrl?: string | null
@@ -1722,6 +1726,7 @@ export const TaskListDocument = gql`
     voiceyouropinionList {
       orgId
       name
+      organizationName
       surveyTopics
       amount
       pictureUrl
@@ -1738,6 +1743,7 @@ export const TaskListDocument = gql`
     usabilitytestingList {
       orgId
       name
+      organizationName
       description
       amount
       pictureUrl
