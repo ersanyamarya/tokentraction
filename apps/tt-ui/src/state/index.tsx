@@ -81,7 +81,7 @@ export const useAuth = () => {
     onCompleted: data => {
       if (data?.userConnectWallet) {
         console.log('data.userConnectWallet', data.userConnectWallet)
-
+        clear()
         setUser(data.userConnectWallet)
       }
 
