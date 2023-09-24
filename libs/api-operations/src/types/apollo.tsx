@@ -1133,6 +1133,7 @@ export type Mutation = {
   personaDelete?: Maybe<RemoveByIdPersonaPayload>;
   /** Update one document: 1) Retrieve one document by findById. 2) Apply updates to mongoose document. 3) Mongoose applies defaults, setters, hooks and validation. 4) And save it. */
   personaUpdate?: Maybe<UpdateByIdPersonaPayload>;
+  topicMessageSummary?: Maybe<Scalars['String']['output']>;
   /** Creates Many documents with mongoose defaults, setters, hooks and validation */
   usabilitytestingBatchCreate?: Maybe<CreateManyUsabilityTestingPayload>;
   /** Create one document with mongoose defaults, setters, hooks and validation */
@@ -1242,6 +1243,11 @@ export type MutationPersonaDeleteArgs = {
 export type MutationPersonaUpdateArgs = {
   _id: Scalars['MongoID']['input'];
   record: UpdateByIdPersonaInput;
+};
+
+
+export type MutationTopicMessageSummaryArgs = {
+  topicId: Scalars['MongoID']['input'];
 };
 
 
@@ -1971,6 +1977,13 @@ export type ForummessageCreateMutationVariables = Exact<{
 
 export type ForummessageCreateMutation = { __typename?: 'Mutation', forummessageCreate?: { __typename?: 'CreateOneMessagePayload', recordId?: any | null } | null };
 
+export type TopicMessageSummaryMutationVariables = Exact<{
+  topicId: Scalars['MongoID']['input'];
+}>;
+
+
+export type TopicMessageSummaryMutation = { __typename?: 'Mutation', topicMessageSummary?: string | null };
+
 export type ForumtopicListQueryVariables = Exact<{
   filter?: InputMaybe<FilterFindManyTopicInput>;
 }>;
@@ -2107,6 +2120,37 @@ export function useForummessageCreateMutation(baseOptions?: Apollo.MutationHookO
 export type ForummessageCreateMutationHookResult = ReturnType<typeof useForummessageCreateMutation>;
 export type ForummessageCreateMutationResult = Apollo.MutationResult<ForummessageCreateMutation>;
 export type ForummessageCreateMutationOptions = Apollo.BaseMutationOptions<ForummessageCreateMutation, ForummessageCreateMutationVariables>;
+export const TopicMessageSummaryDocument = gql`
+    mutation TopicMessageSummary($topicId: MongoID!) {
+  topicMessageSummary(topicId: $topicId)
+}
+    `;
+export type TopicMessageSummaryMutationFn = Apollo.MutationFunction<TopicMessageSummaryMutation, TopicMessageSummaryMutationVariables>;
+
+/**
+ * __useTopicMessageSummaryMutation__
+ *
+ * To run a mutation, you first call `useTopicMessageSummaryMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useTopicMessageSummaryMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [topicMessageSummaryMutation, { data, loading, error }] = useTopicMessageSummaryMutation({
+ *   variables: {
+ *      topicId: // value for 'topicId'
+ *   },
+ * });
+ */
+export function useTopicMessageSummaryMutation(baseOptions?: Apollo.MutationHookOptions<TopicMessageSummaryMutation, TopicMessageSummaryMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<TopicMessageSummaryMutation, TopicMessageSummaryMutationVariables>(TopicMessageSummaryDocument, options);
+      }
+export type TopicMessageSummaryMutationHookResult = ReturnType<typeof useTopicMessageSummaryMutation>;
+export type TopicMessageSummaryMutationResult = Apollo.MutationResult<TopicMessageSummaryMutation>;
+export type TopicMessageSummaryMutationOptions = Apollo.BaseMutationOptions<TopicMessageSummaryMutation, TopicMessageSummaryMutationVariables>;
 export const ForumtopicListDocument = gql`
     query ForumtopicList($filter: FilterFindManyTopicInput) {
   forumtopicList(filter: $filter) {

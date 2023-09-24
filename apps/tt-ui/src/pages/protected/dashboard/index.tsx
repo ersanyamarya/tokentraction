@@ -7,13 +7,15 @@ import {
   useForummessageListQuery,
   useForumtopicListQuery,
   useTaskListQuery,
+  useTopicMessageSummaryMutation,
 } from '@tokentraction/api-operations'
 import { ReactNode, useState } from 'react'
 import { CrowdFunded } from './CrowdFunded'
 import { VoiceYourOpinionSection } from './VoiceYourOpinion'
 import { UsabilityTestingSection } from './UsablityTesting'
-import { Send } from 'lucide-react'
+import { Send, Wand } from 'lucide-react'
 import { useAuth } from '../../../state'
+import { TTLoader } from '@tokentraction/tt-design'
 
 const Container = styled(Box)`
   display: flex;
@@ -147,6 +149,8 @@ function MessageSection({ selectedTopic }: MessageProps) {
     },
   })
 
+  const [summarize, { data: summary, loading }] = useTopicMessageSummaryMutation({})
+
   const [toMessage, setToMessage] = useState('')
 
   const [sendMessage] = useForummessageCreateMutation({
@@ -155,11 +159,27 @@ function MessageSection({ selectedTopic }: MessageProps) {
       setToMessage('')
     },
   })
+  if (loading) {
+    return <TTLoader />
+  }
   return (
-    <Stack>
+    <Stack gap={2}>
       <Typography variant="h2" component="h2" className="h2">
         Topic: {selectedTopic.title}
       </Typography>
+      <Button variant="outlined" onClick={() => summarize({ variables: { topicId: selectedTopic._id } })} endIcon={<Wand />}>
+        Summarize
+      </Button>
+      {summary && (
+        <Stack>
+          <Typography variant="h2" component="h2" className="h2">
+            Topic Summary:
+          </Typography>
+          <Typography variant="h2" component="h2" className="h2">
+            {summary.topicMessageSummary}
+          </Typography>
+        </Stack>
+      )}
 
       <ForumContainer gap={3}>
         {data?.forummessageList.map(message => (

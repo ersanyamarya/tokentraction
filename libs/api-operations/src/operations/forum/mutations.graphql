@@ -9,3 +9,7 @@ mutation ForummessageCreate($record: CreateOneMessageInput!) {
     recordId
   }
 }
+
+mutation TopicMessageSummary($topicId: MongoID!) {
+  topicMessageSummary(topicId: $topicId)
+}
