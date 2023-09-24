@@ -57,7 +57,7 @@ export function LandingPage() {
           }}
         />
         <TitleText variant="h1">Token Traction</TitleText>
-        <SubtitleText variant="h2">Connecting Communities, Powering Progress</SubtitleText>
+        <SubtitleText variant="h2">The pseudonymous network for ventures to power their growth</SubtitleText>
       </Box>
       <Metamask />
     </Container>
