@@ -18,12 +18,14 @@ export function FormSubmissions({ submissions }: FormProps) {
         boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
         backgroundColor: '#fff',
         border: '4px solid var(--Logo-gradient, rgba(3, 251, 191, 0.57))',
-        width: '25rem',
+        width: '32rem',
       }}
     >
       <Typography variant="h4" component="h3">
         Submissions
       </Typography>
+       <Typography variant="body1">Participating will sign a smart contract that will award you Traction Tokens</Typography>
+      <Typography variant="body2">Please fill out the form below to participate</Typography>
       {submissions.map(question => {
         if (question.isMultipleSelect)
           return (
