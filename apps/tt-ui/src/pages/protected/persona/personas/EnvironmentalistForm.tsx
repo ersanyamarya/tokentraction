@@ -3,6 +3,7 @@ import { EnumPersonaPersonaType, useUserGeneratePersonaMutation } from '@tokentr
 import { PersonaQuestion } from '.'
 import useForm from '../../../../hooks/useForm'
 import { useAuth } from '../../../../state'
+import { Wand2 } from 'lucide-react'
 interface EnvironmentalistFormProps {
   setEnvironmentalistPersonaShown: (open: boolean) => void
   seLoading: (loading: boolean) => void
@@ -10,10 +11,11 @@ interface EnvironmentalistFormProps {
 export function EnvironmentalistForm({ setEnvironmentalistPersonaShown, seLoading }: EnvironmentalistFormProps) {
   const { user } = useAuth()
   const [createPersona] = useUserGeneratePersonaMutation({
+    refetchQueries: ['PersonaList'],
     onCompleted: data => {
       seLoading(false)
     },
-    onError: error => {
+    onError: async error => {
       console.log(error)
       seLoading(false)
     },
@@ -75,6 +77,7 @@ export function EnvironmentalistForm({ setEnvironmentalistPersonaShown, seLoadin
           variant="contained"
           color="primary"
           disabled={!valueExists(Object.keys(sampleAnswers))}
+          endIcon={<Wand2 />}
           onClick={() => {
             seLoading(true)
             setEnvironmentalistPersonaShown(false)
@@ -98,7 +101,7 @@ export function EnvironmentalistForm({ setEnvironmentalistPersonaShown, seLoadin
             })
           }}
         >
-          Create
+          Generate Persona Using AI
         </Button>
       </Stack>
     </Stack>

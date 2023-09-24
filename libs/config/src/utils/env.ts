@@ -7,7 +7,3 @@ export const env = (name: string): string | null => {
   }
   return value
 }
-
-export const setEnv = (name: string, value: string): void => {
-  process.env[name] = value
-}

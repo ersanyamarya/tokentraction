@@ -3,6 +3,7 @@ import { EnumPersonaPersonaType, useUserGeneratePersonaMutation } from '@tokentr
 import { PersonaQuestion } from '.'
 import useForm from '../../../../hooks/useForm'
 import { useAuth } from '../../../../state'
+import { Wand2 } from 'lucide-react'
 
 interface HealthCareFormProps {
   setHealthCarePersonaShown: (open: boolean) => void
@@ -11,10 +12,11 @@ interface HealthCareFormProps {
 export function HealthCareForm({ setHealthCarePersonaShown, seLoading }: HealthCareFormProps) {
   const { user } = useAuth()
   const [createPersona] = useUserGeneratePersonaMutation({
+    refetchQueries: ['PersonaList'],
     onCompleted: data => {
       seLoading(false)
     },
-    onError: error => {
+    onError: async error => {
       console.log(error)
       seLoading(false)
     },
@@ -76,6 +78,7 @@ export function HealthCareForm({ setHealthCarePersonaShown, seLoading }: HealthC
           variant="contained"
           color="primary"
           disabled={!valueExists(Object.keys(sampleAnswers))}
+          endIcon={<Wand2 />}
           onClick={() => {
             seLoading(true)
             setHealthCarePersonaShown(false)
@@ -100,7 +103,7 @@ export function HealthCareForm({ setHealthCarePersonaShown, seLoading }: HealthC
             })
           }}
         >
-          Create
+          Generate Persona Using AI
         </Button>
       </Stack>
     </Stack>

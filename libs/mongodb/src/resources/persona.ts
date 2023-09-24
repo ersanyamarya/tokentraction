@@ -25,7 +25,7 @@ export const PersonaSchema = new Schema(
     autoIndex: true,
     autoCreate: true,
   }
-).index({ personaType: 1, userId: 1 }, { unique: true })
+)
 
 export interface PersonaInterface extends Document {
   personaType: string

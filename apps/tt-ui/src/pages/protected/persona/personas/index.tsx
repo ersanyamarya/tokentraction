@@ -38,17 +38,19 @@ export function PersonaTab({ persona }: PersonaTabProps) {
         Personas are the building blocks of the Token Traction platform. Personas assures psuedo-anonymity and allows you to
         tailor your profile to optimize your task recommendations and elevate your Token Traction experience.
       </Typography>
-      <Button
-        variant="contained"
-        color="primary"
-        endIcon={<Plus />}
-        onClick={() => setHealthCarePersonaShown(!healthCarePersonaShown)}
-      >
-        Add Health care Persona
-      </Button>
-      <Button variant="contained" color="primary" endIcon={<Plus />} onClick={() => setEnvironmentalistPersonaShown(true)}>
-        Add Environmental Persona
-      </Button>
+      <Stack direction="row" gap={2} flexWrap={'wrap'}>
+        <Button
+          variant="contained"
+          color="primary"
+          endIcon={<Plus />}
+          onClick={() => setHealthCarePersonaShown(!healthCarePersonaShown)}
+        >
+          Add Health care Persona
+        </Button>
+        <Button variant="contained" color="primary" endIcon={<Plus />} onClick={() => setEnvironmentalistPersonaShown(true)}>
+          Add Environmental Persona
+        </Button>
+      </Stack>
       <Stack gap={2} justifyContent="stretch" alignItems="stretch" direction="row" flexWrap="wrap">
         {data?.personaList?.map(persona => {
           return (
