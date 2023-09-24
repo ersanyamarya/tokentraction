@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "format": "prettier --write \"**/*.{ts,js,json,md}\"",
+    "format": "prettier --write \"**/*.{ts,js,tsx,jsx,graphql,json,md}\"",
     "build:tt-api": "nx build tt-api --prod",
     "run:built:tt-api": "DOTENV_CONFIG_PATH=.env node --require dotenv/config  dist/apps/tt-api/main.js"
   },

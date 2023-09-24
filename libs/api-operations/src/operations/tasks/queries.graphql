@@ -1,0 +1,51 @@
+query TaskList {
+  crowdfundeddataList {
+    orgId
+    name
+    organizationName
+    description
+    amount
+    pictureUrl
+    submissions {
+      question
+      isMultipleChoice
+      isMultipleSelect
+      options
+      answer
+      slug
+    }
+    _id
+  }
+  voiceyouropinionList {
+    orgId
+    name
+    surveyTopics
+    amount
+    pictureUrl
+    submissions {
+      question
+      isMultipleChoice
+      isMultipleSelect
+      options
+      answer
+      slug
+    }
+    _id
+  }
+  usabilitytestingList {
+    orgId
+    name
+    description
+    amount
+    pictureUrl
+    submissions {
+      question
+      isMultipleChoice
+      isMultipleSelect
+      options
+      answer
+      slug
+    }
+    _id
+  }
+}

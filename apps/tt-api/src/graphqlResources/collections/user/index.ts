@@ -49,11 +49,11 @@ UserTC.addRelation('organizations', {
   resolver: () => OrganizationResource.ResourceTC.mongooseResolvers.findMany(),
   prepareArgs: {
     filter: source => ({
-      members:{
+      members: {
         $elemMatch: {
           user: source._id,
-        }
-      }
+        },
+      },
     }),
   },
   projection: { _id: true },

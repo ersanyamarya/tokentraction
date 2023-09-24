@@ -1,4 +1,4 @@
-import { Avatar, Button, Stack, Typography } from '@mui/material'
+import { Avatar, Box, Button, Stack, Typography } from '@mui/material'
 import { User } from '@tokentraction/api-operations'
 import { Plus } from 'lucide-react'
 import { OrgForm } from './OrgForm'
@@ -28,7 +28,20 @@ export function OrganizationsTab({ persona }: OrganizationsTabProps) {
           <Stack gap={8}>
             {persona.organizations?.map(org => (
               <Stack key={org.name} gap={1}>
-                <Typography variant="h5">Organization Name: {org.name}</Typography>
+                <Typography variant="h5">
+                  Organization Name: {org.name} -- {org._id}
+                </Typography>
+                <Box
+                  component="img"
+                  src={org.pictureUrl || ''}
+                  sx={{
+                    width: '80px',
+                    height: '80px',
+                    borderRadius: '50%',
+                    objectFit: 'cover',
+                    boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+                  }}
+                />
                 <Typography variant="body1">{org.description}</Typography>
                 <Stack direction="row" alignItems="center" gap={2}>
                   {['MEMBER 1', 'MEMBER 2'].map(member => (
