@@ -24,7 +24,7 @@ export function FormSubmissions({ submissions }: FormProps) {
       <Typography variant="h4" component="h3">
         Submissions
       </Typography>
-       <Typography variant="body1">Participating will sign a smart contract that will award you Traction Tokens</Typography>
+      <Typography variant="body1">Participating will sign a smart contract that will award you Traction Tokens</Typography>
       <Typography variant="body2">Please fill out the form below to participate</Typography>
       {submissions.map(question => {
         if (question.isMultipleSelect)
@@ -59,8 +59,6 @@ export function FormSubmissions({ submissions }: FormProps) {
           )
       })}
       <Stack direction="row" gap={2} justifyContent="flex-end">
-
-
         <Button variant="contained" color="primary">
           Participate
         </Button>

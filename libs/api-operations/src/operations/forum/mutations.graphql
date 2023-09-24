@@ -1,0 +1,11 @@
+mutation ForumtopicCreate($record: CreateOneTopicInput!) {
+  forumtopicCreate(record: $record) {
+    recordId
+  }
+}
+
+mutation ForummessageCreate($record: CreateOneMessageInput!) {
+  forummessageCreate(record: $record) {
+    recordId
+  }
+}

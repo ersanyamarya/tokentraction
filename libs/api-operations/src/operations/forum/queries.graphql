@@ -1,0 +1,19 @@
+query ForumtopicList {
+  forumtopicList {
+    title
+    _id
+    organizationName
+    summary
+    bestAnswer
+  }
+}
+
+query ForummessageList($filter: FilterFindManyMessageInput) {
+  forummessageList(filter: $filter) {
+    content
+    _id
+    userFullName
+    userPictureUrl
+    userId
+  }
+}
